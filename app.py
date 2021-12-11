@@ -30,7 +30,7 @@ def get_tasks():
 @app.route("/search", methods=["GET", "POST"]) #GET happens by default so we don't have to write it, unless we want POST
 def search():
     query = request.form.get("query") #what the user wrote
-    tasks = list(mongo.db.tasks.find({"$text": {"$search": query}})) #what the database has
+    tasks = list(mongo.db.tasks.find({"$text": {"$search": query}})) #what the database has / 
     return render_template("tasks.html", tasks=tasks) #page render of results
 
 
@@ -116,7 +116,9 @@ def add_task():
             "task_description": request.form.get("task_description"),
             "is_urgent": is_urgent,
             "due_date": request.form.get("due_date"),
-            "created_by": session["user"]
+            "created_by": session["user"],
+            "honey_production": request.form.get("honey_production"),
+            "health": request.form.get("health"),
         }
         mongo.db.tasks.insert_one(task) 
         flash("Task Successfully Added")
@@ -130,13 +132,15 @@ def add_task():
 def edit_task(task_id):
     if request.method == "POST":
         is_urgent = "on" if request.form.get("is_urgent") else "off"
-        submit = {
+        submit = { #get all the values the user has typed
             "category_name": request.form.get("category_name"),
             "task_name": request.form.get("task_name"),
             "task_description": request.form.get("task_description"),
             "is_urgent": is_urgent,
             "due_date": request.form.get("due_date"),
-            "created_by": session["user"]
+            "created_by": session["user"],
+            "honey_production": request.form.get("honey_production"),
+            "health": request.form.get("health"),
         }
         mongo.db.tasks.update_one({"_id": ObjectId(task_id)}, {"$set": submit}) #code fix for tutorial error
         flash("Task Successfully Updated")
@@ -150,7 +154,7 @@ def edit_task(task_id):
 @app.route("/delete_task/<task_id>")
 def delete_task(task_id):
     mongo.db.tasks.delete_one({"_id": ObjectId(task_id)})
-    flash("Task Deleted!")
+    flash("Thank you! The Bee is under investigation by authorities")
     return redirect(url_for("get_tasks"))
 
 

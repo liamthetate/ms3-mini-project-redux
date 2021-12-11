@@ -1,0 +1,50 @@
+{% extends "base.html" %}
+{% block content %}
+
+
+    <div class="row">
+        <div class="col s12 m8 offset-m2">
+            <div class="card=panel">
+                <h3 class="center-align light-blue-text text-darken-4">
+                    {{ username }}'s Profile
+                </h3>
+                <p>
+                    We are a busy hive producing lots of honey.
+                    However some of our worker bees are not as productive as required.
+                    Luckily our new computer database 'IBeeM' is here to help!
+                    It contains the records of every bee in the hive and various details about them.
+                    Help us sort through the data to make our hive as efficient as possible :D
+
+                    1. To gain access to the data, create a Username & Buzzword with the IBeeM
+                    2. See huge list. This is a list of all the bees in the hive.
+                       above search bar (maybe in nav) are numbered empty honeycomb symbols, click to reveal mission.
+                       Data on card is: 
+                        Name: Mr Bee
+                        Honey Production: 50%
+                        Physical Health / Diseased: 50%
+                        OF CONCERN / For the attention? Yes/No True/False
+
+                    3. TASKS / GAME
+                        a) CREATE / READ / UPDATE / DELETE
+                        Find all bees with Health marked DISEASED, then press ALERT! (DISEASED or HEALTHY) 
+                        Find all bees with Honey Production marked as POOR, then press ALERT! (POOR or GOOD)
+                        Find all bees with Surname WASP, then press ALERT! 
+                        Find the bee that previously had your job and get his username and password (admin access)
+                            - once inside you can delete everything or 
+                        Create a record based of picture OR
+                        
+                        (You do have the option as player to alter the records so no one is in poor health,
+                        refusing to report anyone.)
+
+                        
+
+                        3a = something that checks to see if 5 ALERTS! == True: flash congratulations 
+                        
+                    
+
+                </p>
+            </div>
+        </div>
+    </div>
+
+{% endblock %}
