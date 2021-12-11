@@ -28,9 +28,9 @@
             <div class="collapsible-header white-text light-blue darken-4 text-shadow">
                 <div class="col s3">
                     <i class="fas fa-caret-down"></i>
-                    {% if session.user|lower == task.created_by|lower %}
-                        <a href="{{ url_for('delete_task', task_id=task._id) }}" class="btn-small red accent-4">Alert!</a>
-                    {% endif %}
+                 
+                        <a href="{{ url_for('delete_task', task_id=task._id) }}" class="btn-small red accent-4">Alert?</a>
+
                 </div>
                 <div class="col s9">
                     <strong>{{ task.task_name }}</strong> {{ task.class }} <!-- {{ task.task_description }}  : {{ task.due_date }} -->

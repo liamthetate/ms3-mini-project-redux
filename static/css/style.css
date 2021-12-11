@@ -1,5 +1,7 @@
 body {
-    background-color: paleturquoise;
+    background-color: #ffe2a2;
+    color: #341302;
+    font-family: 'IBM Plex Serif', serif;
 }
 
 .text-shadow {
@@ -17,4 +19,8 @@ body {
 .collapsible-header .col strong {
     margin: 5px;
     line-height: 42px;
+}
+
+h1 {
+    font-family: 'IBM Plex Serif', serif;
 }

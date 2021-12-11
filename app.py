@@ -20,6 +20,76 @@ app.secret_key = os.environ.get("SECRET_KEY")               #stock values
 mongo = PyMongo(app)
 
 
+
+
+@app.route("/profile2", methods=["GET", "POST"]) #two different address's will lead to the same place
+def profile2():
+    if request.method == "POST": 
+        num = 1
+        flash("YOU HAVE COMPLETED " + str(num) + "out of 10 TASKS")
+        return redirect(url_for("profile2"))
+
+    return render_template("profile2.html") #takes the taks found in the db and displyas them on page
+
+
+
+#once a user has logged in they can press a button to access the database, this will fill it
+@app.route("/fill_db", methods=["GET", "POST"]) 
+def fill_db():
+    if request.method == "POST":
+        db_entry = { 
+                "category_name": "Worker Bees",
+                "task_name": "Ms Flaps",
+                "task_description": "filling the database",
+                "is_urgent": "off",
+                "due_date": "null",
+                "created_by": session["user"],
+                "honey_production": "good",
+                "health": "diseased"
+            }, { 
+                "category_name": "Worker Bees",
+                "task_name": "Lady McFlaps",
+                "task_description": "balls",
+                "is_urgent": "off",
+                "due_date": "null",
+                "created_by": session["user"],
+                "honey_production": "poor",
+                "health": "healthy"
+            }, { 
+                "category_name": "Worker Bees",
+                "task_name": "Miss Buzzer",
+                "task_description": "more bllas",
+                "is_urgent": "off",
+                "due_date": "null",
+                "created_by": session["user"],
+                "honey_production": "good",
+                "health": "healthy"
+            }, { 
+                "category_name": "Worker Bees",
+                "task_name": "Miss Wasp",
+                "task_description": "bla bla bla",
+                "is_urgent": "off",
+                "due_date": "null",
+                "created_by": session["user"],
+                "honey_production": "good",
+                "health": "healthy"
+            }
+            
+        mongo.db.tasks.insert_many(db_entry)
+        return redirect(url_for("fill_db"))
+
+    return render_template("fill_db.html")
+
+
+@app.route("/start", methods=["GET", "POST"])
+def start():
+    if request.method == "POST":
+        return redirect(url_for("register"))
+
+    return render_template("start.html")
+
+
+
 @app.route("/") #two different address's will lead to the same place
 @app.route("/get_tasks")
 def get_tasks():

@@ -8,9 +8,29 @@
                 <h3 class="center-align light-blue-text text-darken-4">
                     {{ username }}'s Profile
                 </h3>
+
+                <form method = "post">
+                    <div class="row">
+                        <div class="col s12 center-align">
+                            <button class="submit btn-large light-blue darken-1 text-shadow"> <!-- submit triggers python -->
+                                Level up</i>
+                            </button>
+                        </div>
+                    </div>
+                </form>
+                
+                {% if mission == 1: %}
+                    <h1>Congrats! You've finished 1 of 10 tasks</h1>
+                {% else %}
+                    <h1>Hello {{ username }}</h1>
+                {% endif %}
+
+
                 <p>
                     We are a busy hive producing lots of honey.
                     However some of our worker bees are not as productive as required.
+                    Our Queen ordered a census of the hive.
+
                     Luckily our new computer database 'IBeeM' is here to help!
                     It contains the records of every bee in the hive and various details about them.
                     Help us sort through the data to make our hive as efficient as possible :D
@@ -26,23 +46,29 @@
 
                     3. TASKS / GAME
                         a) CREATE / READ / UPDATE / DELETE
+                        As a test to see if you're compitent for the job you have to Create a record based of a picture.
+                        congrats you did it, now you get access to the database.
+
+                        (You can't edit records of royalty or admin/your_boss/BR (Bee Resources))
+
                         Find all bees with Health marked DISEASED, then press ALERT! (DISEASED or HEALTHY) 
                         Find all bees with Honey Production marked as POOR, then press ALERT! (POOR or GOOD)
                         Find all bees with Surname WASP, then press ALERT! 
-                        Find the bee that previously had your job and get his username and password (admin access)
-                            - once inside you can delete everything or 
-                        Create a record based of picture OR
                         
-                        (You do have the option as player to alter the records so no one is in poor health,
-                        refusing to report anyone.)
-
+                        ***You do have the option as player to alter the records so no one is in poor health,
+                        refusing to report anyone. Find the bee that previously had your job and get his username and password (admin access),
+                        once inside you can delete everything or send 'your boss' and the admin staff to die***
+                                
+                        FOR THIS TO WORK I NEED TO CREATE LOGIC THAT:
+                        a) i) something that checks to see if 5 ALERTS! == True: flash congratulations, ticks a honeycomb.
+                           ii) end state that shows a screen for the book
+                        b) ALERTS! does it delete from database or can it simply stop displaying or move them to another list or category
                         
-
-                        3a = something that checks to see if 5 ALERTS! == True: flash congratulations 
-                        
-                    
-
+                        ALT:
+                        a i) something that checks is honey production and health != DISEASE or POOR then flash/modal congratulations / ticks a hidden honeycomb.
+                          ii) if admin/BR are edited to be POOR or ALERT! then flash/modal congratulations / ticks a hidden honeycom
                 </p>
+
             </div>
         </div>
     </div>
