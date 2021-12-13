@@ -44,7 +44,7 @@ a {
 #game-subtitle {
   font-size: 1rem;
   position: absolute;
-  bottom: 300px;
+  bottom: 275px;
 }
 
 #arrow {
@@ -59,20 +59,22 @@ a {
 }
 
 .section {
-  background-color: rgb(255, 238, 238);
   height: 100vh;
-  background-image: url("/static/images/trial.png");
 }
 
 #honey-pot {
-  font-size: 10rem;
+  font-size: 9rem;
 }
 
 .section:nth-child(2) {
-  background-image: url("/static/images/bg25.png");
-  background-repeat: repeat;
-  font-size: 1.5rem;
+  /* background-image: url("/static/images/bg25.png");
+  background-repeat: repeat; */
+  font-size: 1.3rem;
   line-height: 3rem;
+}
+
+#highlight {
+  font-size: 2rem;
 }
 
 #symbol {
@@ -84,6 +86,113 @@ a {
 
 .section:nth-child(3) {
   font-size: 1.5rem;
-  background-image: url("/static/images/hivebg.png");
+   /* background-image: url("/static/images/hivebg.png"); */
 }
 
+
+/* label color */
+.input-field label {
+  color: #333;
+}
+
+/* label focus color */
+.input-field input[type=text]:focus + label {
+  color: #333;
+}
+
+ /* label underline focus color */
+ .input-field input[type=text]:focus {
+  border-bottom: 1px solid #000;
+  box-shadow: 0 1px 0 0 #000;
+}
+/* valid color */
+.input-field input[type=text].valid {
+  border-bottom: 1px solid #000;
+  box-shadow: 0 1px 0 0 #000;
+}
+/* invalid color */
+.input-field input[type=text].invalid {
+  border-bottom: 1px solid #000;
+  box-shadow: 0 1px 0 0 #000;
+}
+/* icon prefix focus color */
+.input-field .prefix.active {
+  color: #000;
+}
+
+
+
+
+
+#congrats {
+  font-size: 8rem;
+  margin-top: 200px;
+
+}
+
+#congrats-subtitle {
+  font-size: 1rem;
+  margin-top: -30px;
+}
+
+#arrow1 {
+  position: absolute;
+  font-size: 3rem;
+  bottom: 20px;
+}
+
+
+
+
+#book {
+  width: 300px; 
+  margin: 50px;
+}
+
+#end2 {
+  font-size: 1rem;
+  line-height: 2rem;
+  text-align: left;
+}
+
+#gameover {
+  font-size: 10rem;
+  margin-top: 200px;
+}
+
+#gameover-subtitle {
+  font-size: 1.8rem;
+  margin-top: -50px;
+}
+
+#final-message {
+  font-size: 0.9rem;
+  margin-top: 200px;
+}
+
+#trail {
+  display: flex;
+  position:relative;
+  right: -458px;
+  opacity: 0.2;
+  top: 50px;
+  width: 900px;
+}
+
+#final-bee {
+  display: flex;
+  position:relative;
+  top: -140px;
+  right: -425px;
+}
+
+#final-message {
+  display: flex;
+  position:relative;
+  top: -410px;
+  right: -30px;
+}
+
+#final-comp {
+  margin-top: 20px;
+}

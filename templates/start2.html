@@ -13,29 +13,25 @@
         
         <div class="section center" id="2">
             <h1 id="honey-pot">🍯</h1><br>
-
-            <div>
                 <p>
-                    We are a busy hive producing lots of honey!<br>
-                    However some of our worker bees are not productive enough.<br><br>
-                    The Queen ordered a census of the hive and our new I🐝M database is here to help!<br>
-                    It contains the records of every bee in the hive and various details about them.<br><br>
+                    We are a busy hive producing lots of honey<br>
+                    However some of our worker bees are not productive enough!<br><br>
+                    The Queen ordered a census and our new I🐝M database now contains records<br>
+                    of every bee in the hive and various details about them.<br><br>
                     Will you help us sort through the data to make our hive as efficient as possible?<br>
                 </p>
-            </div>
             <a href="#3"><i class="fas fa-chevron-down" id="arrow2" aria-hidden="true"></i></a>
         </div>
 
 
         <div class="section center" id="3">
-
           <div class="row">
             <form class="col s12 m8 offset-m2" method="POST" action="{{ url_for('register') }}">
                 <div class="card-panel">
-        
+                    <p>Create a username and buzzword to begin!</p>
                     <!-- user -->
                     <div class="row">
-                        <img src="static/images/symbol2.png" width="25px">
+                        <!-- <img src="static/images/symbol2.png" width="25px"> -->
                         <div class="input-field col s12">
                             <input id="username" name="username" type="text" class="validate" minlength="5" maxlength="15" pattern="^[a-zA-Z0-9]{5,15}$" required>
                             <label for="username">Username</label>

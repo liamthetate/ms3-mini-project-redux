@@ -88,6 +88,16 @@ def start():
 
     return render_template("start.html")
 
+
+@app.route("/end", methods=["GET", "POST"])
+def end():
+    if request.method == "POST":
+        return redirect(url_for("logout"))
+
+    return render_template("end.html")
+
+
+
 @app.route("/start2", methods=["GET", "POST"])
 def start2():
     if request.method == "POST":
