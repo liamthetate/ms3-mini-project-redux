@@ -1,5 +1,4 @@
 body {
-    color: #341302;
     font-family: 'IBM Plex Serif', serif;
 }
 
@@ -62,74 +61,40 @@ h1 {
 
    */
 
-
-   body {
-    font-family: "Open Sans", sans-serif;
-    color: #333;
-    background: #ececec;
+   * {
+    margin: 0;
+    padding: 0;
   }
   
-  #fullview > div {
-    background-color: #eee;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    font-size: 1.688rem;
-    flex-direction: column;
-    padding: 25px;
+  html {
+    font-size: 10px;
   }
   
-  #fullview > div:nth-child(even) {
-    background-color: #282c34;
-    color: #ffffff;
+  body {
+    background-color: #333;
   }
   
-  #fullview h2 {
-    margin: auto;
-    width: 50%;
+  #fullpage {
     text-align: center;
   }
   
-  button {
-    cursor: pointer;
-    margin-right: 0;
-    margin-bottom: 0;
+  .section {
+    background-color: rgb(236, 107, 107);
+    font-family: arial;
+    font-weight: bold;
+    font-size: 30rem;
+    color: #fff;
+    text-shadow: 1px 1px 10px rgba(0, 0, 0, .6);
   }
   
-  select,
-  input, button {
-    display: inline-block;
-    padding: 8px 17px;
-    background-color: #ffffff;
-    box-shadow: 0px 2px 9px #888;
-    border: 1px solid transparent;
+  .section:nth-child(2) {
+    background-color: rgb(57, 176, 57);
   }
   
-  #down {
-    box-shadow: 0px 2px 9px #888;
+  .section:nth-child(3) {
+    background-color: rgb(101, 101, 211);
   }
   
-  form {
-    display: flex;
-    flex-direction: column;
+  .section:nth-child(4) {
+    background-color: rgb(231, 86, 231);
   }
-  
-  form label {
-    font-size: 1rem;
-    margin-bottom: 5px;
-  }
-  
-  /* Override Styles */
-  #fv-dots ul li a span {
-    background-color: #888888;
-    border-radius: 0;
-    transition: all 0.5s ease;
-  }
-  
-  #fv-dots ul a.active span {
-    width: 11px;
-    height: 11px;
-    transform: rotate(45deg);
-    background-color: #bdbdbd;
-  }
-  

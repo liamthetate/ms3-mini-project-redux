@@ -1,52 +1,38 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+{% extends "base_bare.html" %}
+{% block content %}
 
-    <link rel="stylesheet" type="text/css" href="./static/css/fullview.css" />
-    <!-- Javascript Files -->
-    <script  src="https://code.jquery.com/jquery-3.5.1.min.js"  crossorigin="anonymous"></script>
-    <script type="text/javascript" src="./static/js/fullview.js"></script>
+    <div id="fullpage">
+        <div class="section center">
+            <h1 id="game-title">I🐝M</h1>
+            <p id="game-subtitle">A short admin game about efficient honey production</p>
+            <i class="fa fa-arrow-down" id="arrow" aria-hidden="true"></i>
+        </div>
         
-    <link rel="stylesheet" href="./static/css/style.css" type="text/css">
 
-    <title>Document</title>
-</head>
-<body>
-   
 
-    <div id="fullview">
-      <div id="section1" class="active" data-tooltip="Section 1 Title">
-        <h2>Section 1</h2>
-        <button title="Down" id="down"><span>Click Here</span></button>
-      </div>
-      <div id="section2" data-tooltip="Section 2 Title">
-        <h2>Section 2</h2>
-        <div class="form">
-          <form>
-            <label for="select">Choose Section To Scroll</label>
-            <select name="section" id="select">
-              <option value="0">Section: 1</option>
-              <option value="1">Section: 2</option>
-              <option value="2">Section: 3</option>
-              <option value="3">Section: 4</option>
-            </select>
-          </form>
+        <div class="section">
+          <div class="slide">
+            <p>We are a busy hive producing lots of honey.<br>
+                However some of our worker bees are not as productive as required.<br>
+                Wanna help us make our hive great?</p>
+          </div>
+          <div class="slide">
+            <p>2-2</p>
+          </div>
+          <div class="slide">
+            <p>2-3</p>
+          </div>
+          <div class="slide">
+            <p>2-4</p>
+          </div>
+        </div>
+        <div class="section">
+          <p>3</p>
+        </div>
+        <div class="section">
+          <p>4</p>
         </div>
       </div>
-      <div id="section3" data-tooltip="Section 3 Title">
-        <h2>Section 3</h2>
-      </div>
-      <div id="section4" data-tooltip="Section 4 Title">
-        <h2>Section 4</h2>
-      </div>
-    </div>
 
-
-    
-</body>
-</html>
-
+{% endblock %}
     

@@ -1,0 +1,62 @@
+ * {
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  font-size: 10px;
+}
+
+body {
+  background-color: #333;
+}
+
+#fullpage {
+  text-align: center;
+}
+
+.center {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+#game-title {
+  position: absolute;
+  top: 250px;
+}
+
+#game-subtitle {
+  position: absolute;
+  font-size: 1.5rem;
+  bottom: 325px;
+}
+
+#arrow {
+  position: absolute;
+  font-size: 5rem;
+  bottom: 20px;
+}
+
+.section {
+  background-color: rgb(236, 107, 107);
+  color: #fff;
+  height: 100vh;
+}
+
+.section h1 {
+font-size: 14rem;
+}
+
+.section p {
+  font-size: 4rem;
+  }
+
+.section:nth-child(2) {
+  background-color: rgb(57, 176, 57);
+}
+
+.section:nth-child(3) {
+  background-color: #6565d3;
+}
+
