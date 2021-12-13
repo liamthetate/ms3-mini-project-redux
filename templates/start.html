@@ -1,25 +1,70 @@
 {% extends "base_bare.html" %}
 {% block content %}
 
-    <div class="row">
+<div id="fullview"> 
+    <div class="section">Section 1</div> 
+    <div class="section">Section 2</div> 
+    <div class="section">Section 3</div>  
+ </div>
+
+    <div class="row" id="fullscreen">
         <div class="col s12 m8 offset-m2">
             <div class="card=panel">
                 <h1 class="center-align">I🐝M</h1>
                 <p class="center-align">We are a busy hive producing lots of honey.<br>
                     However some of our worker bees are not as productive as required.<br>
                     Wanna help us make our hive great?</p>
+            </div>
+        </div>
+    </div>
+
+    <div class="row" id="fullscreen">
+        <div class="col s12 m8 offset-m2">
+            <div class="card=panel">
+                <h1 class="center-align">I🐝M</h1>
+                <p class="center-align">We are a busy hive producing lots of honey.<br>
+                    However some of our worker bees are not as productive as required.<br>
+                    Wanna help us make our hive great?</p>
+            </div>
+        </div>
+    </div>
+
+    <div class="row" id="fullscreen">
+        <div class="col s12 m8 offset-m2">
+            <div class="card=panel">
+                <h1 class="center-align">I🐝M</h1>
+                <p class="center-align">We are a busy hive producing lots of honey.<br>
+                    However some of our worker bees are not as productive as required.<br>
+                    Wanna help us make our hive great?</p>
+            </div>
+        </div>
+    </div>
+
+                    <div class="input-field col s12">
+                        <i class="fas fa-align-left prefix light-blue-text text-darken-4"></i>
+                        <textarea id="question" name="question" minlength="4"
+                          maxlength="50" class="materialize-textarea validate" required></textarea>
+                        <label for="question">question</label>
+                      </div>
+
+                      <a onclick="M.toast({html: 'I am a toast'})" class="btn">Toast!</a>
+        
+
                 <form method = "post">
                     <div class="row">
                         <div class="col s12 center-align pt2">
-                            <button class="submit btn-large black"> <!-- submit triggers python -->
+                            <button class="submit btn-large black pulse"> <!-- submit triggers python -->
                                 Sure!</i>
                             </button>
                         </div>
                     </div>
                 </form>
+
+
+
+
+
                 
-            </div>
-        </div>
-    </div>
+
 
 {% endblock %}

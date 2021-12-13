@@ -88,7 +88,12 @@ def start():
 
     return render_template("start.html")
 
+@app.route("/start2", methods=["GET", "POST"])
+def start2():
+    if request.method == "POST":
+        return redirect(url_for("register"))
 
+    return render_template("start2.html")
 
 @app.route("/") #two different address's will lead to the same place
 @app.route("/get_tasks")
