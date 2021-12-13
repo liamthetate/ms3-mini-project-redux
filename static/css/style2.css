@@ -1,62 +1,89 @@
  * {
-  margin: 0;
-  padding: 0;
+  margin: 0; 
+  padding: 0; 
 }
 
-html {
-  font-size: 10px;
+a {
+  color: #333;
+}
+
+.container {
+  width: 100% !important;
 }
 
 body {
-  background-color: #333;
+  font-family: 'IBM Plex Serif', serif;
+  color: #333;
 }
 
+
+
+/*
 #fullpage {
   text-align: center;
 }
+*/
 
-.center {
+a {
+  text-decoration: none;
+  color:#333;
+}
+
+.center-custom {
   display: flex;
   justify-content: center;
   align-items: center;
 }
 
 #game-title {
+  font-size: 10rem;
   position: absolute;
-  top: 250px;
+  top: 225px;
 }
 
 #game-subtitle {
+  font-size: 1rem;
   position: absolute;
-  font-size: 1.5rem;
-  bottom: 325px;
+  bottom: 300px;
 }
 
 #arrow {
   position: absolute;
-  font-size: 5rem;
+  font-size: 3rem;
   bottom: 20px;
 }
 
+#arrow2 {
+  margin-top: 40px;
+  font-size: 3rem;
+}
+
 .section {
-  background-color: rgb(236, 107, 107);
-  color: #fff;
+  background-color: rgb(255, 238, 238);
   height: 100vh;
+  background-image: url("/static/images/trial.png");
 }
 
-.section h1 {
-font-size: 14rem;
+#honey-pot {
+  font-size: 10rem;
 }
-
-.section p {
-  font-size: 4rem;
-  }
 
 .section:nth-child(2) {
-  background-color: rgb(57, 176, 57);
+  background-image: url("/static/images/bg25.png");
+  background-repeat: repeat;
+  font-size: 1.5rem;
+  line-height: 3rem;
 }
 
+#symbol {
+  margin-top: 80px;
+  margin-bottom: 60px;
+}
+
+
+
 .section:nth-child(3) {
-  background-color: #6565d3;
+  font-size: 1.5rem;
+  background-image: url("/static/images/hivebg.png");
 }
 
