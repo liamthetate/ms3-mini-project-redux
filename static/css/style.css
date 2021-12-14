@@ -52,6 +52,13 @@ change "brown" to something of your choosing
 }
 */
 
+
+
+#checkbox {
+  position:relative;
+  top-margin: 5px;
+}
+
 a {
   text-decoration: none;
   color:#333;

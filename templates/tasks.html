@@ -1,15 +1,13 @@
 {% extends "base.html" %}
 {% block content %}
 
-    <h3 class="light-blue-text text-darken-4 center-align">All Tasks</h3>
-
     <div class="row card-panel grey lighten-5">
         <form action="{{ url_for('search') }}" method="post" class="col s12">
             <div class="row valign-wrapper center-align">
                 <div class="input-field col s12 m8">
                     <i class="fas fa-search prefix light-blue-text text-darken-4"></i>
                     <input type="text" name="query" id="query" minlength="3" class="validate" required>
-                    <label for="query">Search Tasks</label>
+                    <label for="query">Search Hive</label>
                 </div>
                 <div class="col s12 m4">
                     <a href="{{ url_for('get_tasks') }}" class="btn grey text-darken waves-effect waves-red">Reset</a>
@@ -21,26 +19,31 @@
             </div>
         </form>
     </div>
+    
+    <form action="/fill-db-button">
+        <input type="submit" value="Fill DataBase" />
+    </form>
 
-    <a onclick="M.toast({html: 'Bee Reported'})" class="btn">ALERT?</a>
+    <form action="/delete-all">
+        <input type="submit" value="Delete All" />
+    </form>
 
     {% if tasks|length > 0 %}
     <ul class="collapsible">
         {% for task in tasks %}
         <li>
-            <div class="collapsible-header white-text light-blue darken-4 text-shadow">
-                <div class="col s3">
-                    <i class="fas fa-caret-down"></i>
-                 
-                        <a href="{{ url_for('delete_task', task_id=task._id) }}" class="btn-small red accent-4">Alert?</a>
-
-                </div>
-                <div class="col s9">
-                    <strong>{{ task.task_name }}</strong> {{ task.class }} <!-- {{ task.task_description }}  : {{ task.due_date }} -->
-                    {% if task.is_urgent == "on" %}
+            <div class="collapsible-header">
+                <div class="col s12">
+                    <label><input type="checkbox" name="checkbox" id="checkbox"><span>{{ task.task_name }} </span></label>
+                        🍯 {{ task.honey_production }}     🩸 {{ task.health }}
+                    {% if task.health == "diseased" %}
                         <i class="fas fa-exclamation-circle light-blue-text text-lighten-2 tooltipped"
                             data-position="right" data-tooltip="URGENT!"></i>
                     {% endif %}
+                    <a href="{{ url_for('delete_task', task_id=task._id) }}"
+                        onclick="M.toast({html: 'Bee Reported'})"
+                        class="right btn-small orange accent-4 waves-effect waves-red">Alert?</a>
+                    <i class="fas fa-info-circle"></i>
                 </div>
             </div>
             <div class="collapsible-body">

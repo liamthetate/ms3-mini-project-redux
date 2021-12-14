@@ -1,5 +1,5 @@
 import os
-import random
+import random #for game data
 from flask import (
     Flask, flash, render_template, #flash is the prompts for the user
     redirect, request, session, url_for) #request reads forms from the user
@@ -20,9 +20,12 @@ app.secret_key = os.environ.get("SECRET_KEY")               #stock values
 
 mongo = PyMongo(app)
 
+
 @app.route("/") #two different address's will lead to the same place
 @app.route("/start", methods=["GET", "POST"])
 def start():
+    for i in range(20): #number of bees in hive
+            mongo.db.tasks.insert_one(automated_db())
     if request.method == "POST": #has use tried to post info? then...
         existing_user = mongo.db.users.find_one( # look at 'users' on db and see if they are there
             {"username": request.form.get("username").lower()})
@@ -44,6 +47,8 @@ def start():
 
     return render_template("start.html")
 
+
+# Generates the data required for the game
 def bee_name():
     first_name = [
         "Lady", "Stella", "Ms", "Beatrix", "Buzz", "Edith",
@@ -56,10 +61,12 @@ def bee_name():
     name = first_name[random.randint(0, 11)] + " " + second_name[random.randint(0, 11)]
     return name
 
+
 def efficiency():
-    honey_prodcution = ["poor", "good", "excellent"]
-    efficiency = honey_prodcution[random.randint(0, 2)]
+    honey_production = ["poor", "good", "excellent"]
+    efficiency = honey_production[random.randint(0, 2)]
     return efficiency
+
 
 def health():
     health = ["diseased", "ok", "healthy"]
@@ -67,43 +74,60 @@ def health():
     return health_rating
 
 
-#once a user has logged in they can press a button to access the database, this will fill it
+def automated_db():
+    db_template = { 
+            "category_name": "TEST",
+            "task_name": bee_name(),
+            "created_by": session["user"],
+            "honey_production": efficiency(),
+            "health": health()
+            }
+    return db_template
+
+
+#Automatically generates the database when the player STARTS
 @app.route("/fill_db", methods=["GET", "POST"]) 
 def fill_db():
     if request.method == "POST":
-        db_entry = { 
-                "category_name": "TEST",
-                "task_name": bee_name(),
-                "created_by": session["user"],
-                "honey_production": efficiency(),
-                "health": health()
-            }, { 
-                "category_name": "Worker Bees",
-                "task_name": bee_name(),
-                "created_by": session["user"],
-                "honey_production": efficiency(),
-                "health": health()
-            }, { 
-                "category_name": "Worker Bees",
-                "task_name": bee_name(),
-                "created_by": session["user"],
-                "honey_production": efficiency(),
-                "health": health()
-            }, { 
-                "category_name": "Worker Bees",
-                "task_name": bee_name(),
-                "created_by": session["user"],
-                "honey_production": efficiency(),
-                "health": health()
-            }
-            
-        mongo.db.tasks.insert_many(db_entry)
+        for i in range(20): #number of bees in hive
+            mongo.db.tasks.insert_one(automated_db())
         return redirect(url_for("fill_db"))
 
     return render_template("fill_db.html")
 
 
+@app.route("/fill-db-button", methods=["GET", "POST"]) 
+def fill_db_button():
+    for i in range(20): #number of bees in hive
+        mongo.db.tasks.insert_one(automated_db())
+    return redirect("get_tasks")
 
+@app.route("/delete-all", methods=["GET", "POST"]) 
+def delete_all():
+    mongo.db.tasks.delete_many({})
+    return redirect("get_tasks")
+
+@app.route("/end-state", methods=["GET", "POST"]) 
+def end_state():
+    any_wasps = list(mongo.db.tasks.find({"$text": {"$search": "wasp"}}))
+    any_poor = list(mongo.db.tasks.find({"$text": {"$search": "poor"}}))
+    any_diseased = list(mongo.db.tasks.find({"$text": {"$search": "diseased"}}))
+
+    if any_wasps and any_poor and any_diseased:
+        pass
+
+    if any_wasps:
+        flash(str(len(any_wasps)) + " Wasp still remain")
+    if any_poor:
+        flash(str(len(any_poor)) + " poor still remain")
+    if any_diseased:
+        flash(str(len(any_diseased)) + " diseased still remain")  
+
+    else:
+        return redirect(url_for("end"))
+
+    return render_template("end-state.html")
+    
 
 
 @app.route("/end", methods=["GET", "POST"])
@@ -118,16 +142,21 @@ def end():
 #@app.route("/") #two different address's will lead to the same place
 @app.route("/get_tasks")
 def get_tasks():
+    end_state()
     tasks = list(mongo.db.tasks.find()) #.tasks inside this is referencing the tasks on mongo
     return render_template("tasks.html", tasks=tasks) #takes the taks found in the db and displyas them on page
 
+def search_memory():
+    query = request.form.get("query")
+    print(query)
+    return query
 
-@app.route("/search", methods=["GET", "POST"]) #GET happens by default so we don't have to write it, unless we want POST
+@app.route("/search/", methods=["GET", "POST"]) #GET happens by default so we don't have to write it, unless we want POST
 def search():
     query = request.form.get("query") #what the user wrote
     tasks = list(mongo.db.tasks.find({"$text": {"$search": query}})) #what the database has / 
     return render_template("tasks.html", tasks=tasks) #page render of results
-
+    #return redirect(url_for("get_tasks"))
 
 @app.route("/register", methods=["GET", "POST"])
 def register():
@@ -250,6 +279,7 @@ def edit_task(task_id):
 def delete_task(task_id):
     mongo.db.tasks.delete_one({"_id": ObjectId(task_id)})
     flash("Thank you! The Bee is under investigation by authorities")
+    #return render_template("tasks.html")
     return redirect(url_for("get_tasks"))
 
 
