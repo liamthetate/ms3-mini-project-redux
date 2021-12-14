@@ -3,9 +3,47 @@
   padding: 0; 
 }
 
+/* -------------------------------------------------------- colors */
+
 a {
   color: #333;
 }
+
+/* label color */
+.input-field label {
+  color: #333;
+}
+
+/* label focus color */
+.input-field input[type=text]:focus + label {
+  color: #333;
+}
+
+ /* label underline focus color */
+ .input-field input[type=text]:focus {
+  border-bottom: 1px solid #000;
+  box-shadow: 0 1px 0 0 #000;
+}
+/* valid color */
+.input-field input[type=text].valid {
+  border-bottom: 1px solid #000;
+  box-shadow: 0 1px 0 0 #000;
+}
+/* invalid color */
+.input-field input[type=text].invalid {
+  border-bottom: 1px solid #000;
+  box-shadow: 0 1px 0 0 #000;
+}
+/* icon prefix focus color */
+.input-field .prefix.active {
+  color: #000;
+}
+
+
+
+
+
+
 
 .container {
   width: 100% !important;
@@ -15,12 +53,6 @@ body {
   font-family: 'IBM Plex Serif', serif;
   color: #333;
 }
-
-
-/*
-.text-shadow {
-  text-shadow: 2px 2px 2px rgba(0, 0, 0, 0.5)
-}*/
 
 .flashes h4 {
   line-height: 2;
@@ -45,14 +77,10 @@ change "brown" to something of your choosing
    background-color: rgba(121, 85, 72, 0.65);
  }
 
- 
 /*
 #fullpage {
   text-align: center;
 }
-
-
-
 
 #checkbox {
   position:relative;
@@ -60,12 +88,9 @@ change "brown" to something of your choosing
 }
 */
 
-
 #grey {
   color: rgb(201, 201, 201);
 }
-
-
 
 a {
   text-decoration: none;
@@ -109,9 +134,9 @@ a {
   font-size: 9rem;
 }
 
+/* 
+https://codepen.io/seolan/pen/jbGyxq*/
 .section:nth-child(2) {
-  /* background-image: url("/static/images/bg25.png");
-  background-repeat: repeat; */
   font-size: 1.3rem;
   line-height: 3rem;
 }
@@ -125,47 +150,10 @@ a {
   margin-bottom: 60px;
 }
 
-
-
 .section:nth-child(3) {
   font-size: 1.5rem;
    /* background-image: url("/static/images/hivebg.png"); */
 }
-
-
-/* label color */
-.input-field label {
-  color: #333;
-}
-
-/* label focus color */
-.input-field input[type=text]:focus + label {
-  color: #333;
-}
-
- /* label underline focus color */
- .input-field input[type=text]:focus {
-  border-bottom: 1px solid #000;
-  box-shadow: 0 1px 0 0 #000;
-}
-/* valid color */
-.input-field input[type=text].valid {
-  border-bottom: 1px solid #000;
-  box-shadow: 0 1px 0 0 #000;
-}
-/* invalid color */
-.input-field input[type=text].invalid {
-  border-bottom: 1px solid #000;
-  box-shadow: 0 1px 0 0 #000;
-}
-/* icon prefix focus color */
-.input-field .prefix.active {
-  color: #000;
-}
-
-
-
-
 
 #congrats {
   font-size: 8rem;
@@ -183,9 +171,6 @@ a {
   font-size: 3rem;
   bottom: 20px;
 }
-
-
-
 
 #book {
   width: 300px; 

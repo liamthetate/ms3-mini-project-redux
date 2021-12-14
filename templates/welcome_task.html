@@ -1,0 +1,43 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+    <h3 class="light-blue-text text-dark-4 center-align">Add Task</h3>
+
+    <div class="row card-panel grey lighten-5">
+        <form class="col s12" method="POST" action="{{ url_for('add_task') }}"> <!-- triggers python add_task -->
+
+          <div class="row">
+            <div class="input-field col s12">
+              <i class="fas fa-pencil-alt prefix light-blue-text text-darken-4"></i>
+              <input id="task_name" name="task_name" minlength="5" maxlength="50"
+              type="text" class="validate" required>
+              <label for="task_name">Bee Name</label>
+            </div>
+          </div>
+            <div class="input-field col s12">
+              <i class="fas fa-align-left prefix light-blue-text text-darken-4"></i>
+              <textarea id="honey_production" name="honey_production" minlength="4"
+                maxlength="50" class="materialize-textarea validate" required placeholder="Good or Poor"></textarea>
+              <label for="honey_production">Honey Productivity</label>
+            </div>
+
+            <div class="input-field col s12">
+              <i class="fas fa-align-left prefix light-blue-text text-darken-4"></i>
+              <textarea id="health" name="health" minlength="4"
+                maxlength="50" class="materialize-textarea validate" required placeholder="Healthy or Diseased"></textarea>
+              <label for="health">Health</label>
+            </div>
+          
+            <div class="row">
+                <div class="col s12 center-align">
+                    <button class="submit btn-large light-blue darken-1 text-shadow"> <!-- submit triggers python -->
+                        Add Task <i class="fas fa-plus-square right"></i>
+                    </button>
+                </div>
+            </div>
+
+        </form>
+      </div>
+
+{% endblock %}
