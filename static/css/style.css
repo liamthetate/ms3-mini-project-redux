@@ -50,14 +50,22 @@ change "brown" to something of your choosing
 #fullpage {
   text-align: center;
 }
-*/
+
 
 
 
 #checkbox {
   position:relative;
-  top-margin: 5px;
+  margin-bottom: 5px;
 }
+*/
+
+
+#grey {
+  color: rgb(201, 201, 201);
+}
+
+
 
 a {
   text-decoration: none;

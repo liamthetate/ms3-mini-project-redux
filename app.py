@@ -20,14 +20,14 @@ app.secret_key = os.environ.get("SECRET_KEY")               #stock values
 
 mongo = PyMongo(app)
 
-
-@app.route("/") #two different address's will lead to the same place
+#creates database on load
+@app.route("/") 
 @app.route("/start", methods=["GET", "POST"])
 def start():
     for i in range(20): #number of bees in hive
-            mongo.db.tasks.insert_one(automated_db())
-    if request.method == "POST": #has use tried to post info? then...
-        existing_user = mongo.db.users.find_one( # look at 'users' on db and see if they are there
+            mongo.db.tasks.insert_one(automated_db()) 
+    if request.method == "POST": 
+        existing_user = mongo.db.users.find_one( 
             {"username": request.form.get("username").lower()})
 
         if existing_user:
@@ -63,13 +63,13 @@ def bee_name():
 
 
 def efficiency():
-    honey_production = ["poor", "good", "excellent"]
+    honey_production = ["🍯 poor", "🍯🍯🍯 good", "🍯🍯🍯🍯🍯 excellent"]
     efficiency = honey_production[random.randint(0, 2)]
     return efficiency
 
 
 def health():
-    health = ["diseased", "ok", "healthy"]
+    health = ["🩸 diseased", "🩸🩸🩸 ok", "🩸🩸🩸🩸🩸 healthy"]
     health_rating = health[random.randint(0, 2)]
     return health_rating
 
@@ -107,44 +107,53 @@ def delete_all():
     mongo.db.tasks.delete_many({})
     return redirect("get_tasks")
 
+
 @app.route("/end-state", methods=["GET", "POST"]) 
 def end_state():
     any_wasps = list(mongo.db.tasks.find({"$text": {"$search": "wasp"}}))
     any_poor = list(mongo.db.tasks.find({"$text": {"$search": "poor"}}))
     any_diseased = list(mongo.db.tasks.find({"$text": {"$search": "diseased"}}))
+    any_spielberg = list(mongo.db.tasks.find({"$text": {"$search": "spielberg"}}))
 
-    if any_wasps and any_poor and any_diseased:
-        pass
+    #if any_wasps and any_poor and any_diseased and any_spielberg:
+        #pass
 
     if any_wasps:
         flash(str(len(any_wasps)) + " Wasp still remain")
     if any_poor:
         flash(str(len(any_poor)) + " poor still remain")
     if any_diseased:
-        flash(str(len(any_diseased)) + " diseased still remain")  
+        flash(str(len(any_diseased)) + " diseased still remain")
+    if any_spielberg:
+        flash(str(len(any_spielberg)) + " spielberg still remain")  
 
     else:
+        flash("WELL DONE CLICK HERE")
         return redirect(url_for("end"))
 
-    return render_template("end-state.html")
-    
+    return render_template("end-state.html") #don't need this anymore
 
 
-@app.route("/end", methods=["GET", "POST"])
-def end():
-    if request.method == "POST":
-        return redirect(url_for("logout"))
 
-    return render_template("end.html")
+
 
 
 
 #@app.route("/") #two different address's will lead to the same place
 @app.route("/get_tasks")
 def get_tasks():
-    end_state()
+    end_state() #gets update on remaining missions
     tasks = list(mongo.db.tasks.find()) #.tasks inside this is referencing the tasks on mongo
     return render_template("tasks.html", tasks=tasks) #takes the taks found in the db and displyas them on page
+
+
+@app.route("/get_tasks2")
+def get_tasks2():
+    end_state()
+    tasks = list(mongo.db.tasks.find()) #.tasks inside this is referencing the tasks on mongo
+    return render_template("tasks2.html", tasks=tasks) #takes the taks found in the db and displyas them on page
+
+
 
 def search_memory():
     query = request.form.get("query")
@@ -278,7 +287,7 @@ def edit_task(task_id):
 @app.route("/delete_task/<task_id>")
 def delete_task(task_id):
     mongo.db.tasks.delete_one({"_id": ObjectId(task_id)})
-    flash("Thank you! The Bee is under investigation by authorities")
+    #flash("Thank you! The Bee is under investigation by authorities")
     #return render_template("tasks.html")
     return redirect(url_for("get_tasks"))
 
@@ -322,6 +331,15 @@ def delete_category(category_id):
     flash("Category Deleted!")
     return redirect(url_for("get_categories"))
 
+
+@app.route("/end", methods=["GET", "POST"])
+def end():
+    if request.method == "POST":
+        return redirect(url_for("logout"))
+
+    mongo.db.tasks.delete_many({}) #deletes database
+    return render_template("end.html")
+    
 
 if __name__ == "__main__":
     app.run(host=os.environ.get("IP"),
