@@ -1,4 +1,5 @@
 import os
+import random
 from flask import (
     Flask, flash, render_template, #flash is the prompts for the user
     redirect, request, session, url_for) #request reads forms from the user
@@ -19,57 +20,61 @@ app.secret_key = os.environ.get("SECRET_KEY")               #stock values
 
 mongo = PyMongo(app)
 
+@app.route("/") #two different address's will lead to the same place
+@app.route("/start", methods=["GET", "POST"])
+def start():
+    if request.method == "POST": #has use tried to post info? then...
+        existing_user = mongo.db.users.find_one( # look at 'users' on db and see if they are there
+            {"username": request.form.get("username").lower()})
 
+        if existing_user:
+            flash("Username already exists") #settings for flash to be found on base.html
+            return redirect(url_for("register")) #basically try again
 
+        register = { #gets values from users form
+            "username": request.form.get("username").lower(),
+            "password": generate_password_hash(request.form.get("password"))
+        }
+        mongo.db.users.insert_one(register) #adds those values into the db
 
-@app.route("/profile2", methods=["GET", "POST"]) #two different address's will lead to the same place
-def profile2():
-    if request.method == "POST": 
-        num = 1
-        flash("YOU HAVE COMPLETED " + str(num) + "out of 10 TASKS")
-        return redirect(url_for("profile2"))
+        # put the new user into 'session' cookie
+        session["user"] = request.form.get("username").lower() #gets username
+        flash("Registration Successful!")
+        return redirect(url_for("get_tasks", username=session["user"])) #takes user to own page url
 
-    return render_template("profile2.html") #takes the taks found in the db and displyas them on page
+    return render_template("start.html")
 
-
+def bee_name():
+    first_name = ["Lady", "Stella", "Ms", "Beatrix", "Buzz", "Edith"]
+    second_name = ["McFly", "Flaps", "Wasp", "Bee", "McBeeFace", "Window-Basher"]
+    name = first_name[random.randint(0, 5)] + " " + second_name[random.randint(0, 5)]
+    return name
 
 #once a user has logged in they can press a button to access the database, this will fill it
 @app.route("/fill_db", methods=["GET", "POST"]) 
 def fill_db():
     if request.method == "POST":
         db_entry = { 
-                "category_name": "Worker Bees",
-                "task_name": "Ms Flaps",
-                "task_description": "filling the database",
-                "is_urgent": "off",
-                "due_date": "null",
+                "category_name": "TEST",
+                "task_name": bee_name(),
                 "created_by": session["user"],
                 "honey_production": "good",
                 "health": "diseased"
             }, { 
                 "category_name": "Worker Bees",
-                "task_name": "Lady McFlaps",
-                "task_description": "balls",
-                "is_urgent": "off",
-                "due_date": "null",
+                "task_name": bee_name(),
                 "created_by": session["user"],
                 "honey_production": "poor",
                 "health": "healthy"
             }, { 
                 "category_name": "Worker Bees",
-                "task_name": "Miss Buzzer",
-                "task_description": "more bllas",
-                "is_urgent": "off",
-                "due_date": "null",
+                "task_name": bee_name(),
                 "created_by": session["user"],
                 "honey_production": "good",
                 "health": "healthy"
             }, { 
                 "category_name": "Worker Bees",
-                "task_name": "Miss Wasp",
-                "task_description": "bla bla bla",
-                "is_urgent": "off",
-                "due_date": "null",
+                "task_name": bee_name(),
                 "created_by": session["user"],
                 "honey_production": "good",
                 "health": "healthy"
@@ -81,12 +86,7 @@ def fill_db():
     return render_template("fill_db.html")
 
 
-@app.route("/start", methods=["GET", "POST"])
-def start():
-    if request.method == "POST":
-        return redirect(url_for("register"))
 
-    return render_template("start.html")
 
 
 @app.route("/end", methods=["GET", "POST"])
@@ -98,14 +98,7 @@ def end():
 
 
 
-@app.route("/start2", methods=["GET", "POST"])
-def start2():
-    if request.method == "POST":
-        return redirect(url_for("register"))
-
-    return render_template("start2.html")
-
-@app.route("/") #two different address's will lead to the same place
+#@app.route("/") #two different address's will lead to the same place
 @app.route("/get_tasks")
 def get_tasks():
     tasks = list(mongo.db.tasks.find()) #.tasks inside this is referencing the tasks on mongo
@@ -126,7 +119,7 @@ def register():
             {"username": request.form.get("username").lower()})
 
         if existing_user:
-            flash("Username already exists") #settings for this to be found on base.html
+            flash("Username already exists") #settings for flash to be found on base.html
             return redirect(url_for("register")) #basically try again
 
         register = { #gets values from users form
@@ -161,12 +154,12 @@ def login():
             else:
                 # invalid password match
                 flash("Incorrect Username and/or Password")
-                return redirect(url_for("login"))
+                return redirect(url_for("login_again"))
 
         else:
             # username doesn't exist
             flash("Incorrect Username and/or Password")
-            return redirect(url_for("login"))
+            return redirect(url_for("login_again"))
 
     return render_template("login.html")
 

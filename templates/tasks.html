@@ -22,6 +22,8 @@
         </form>
     </div>
 
+    <a onclick="M.toast({html: 'Bee Reported'})" class="btn">ALERT?</a>
+
     {% if tasks|length > 0 %}
     <ul class="collapsible">
         {% for task in tasks %}
