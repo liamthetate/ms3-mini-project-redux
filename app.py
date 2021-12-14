@@ -45,10 +45,27 @@ def start():
     return render_template("start.html")
 
 def bee_name():
-    first_name = ["Lady", "Stella", "Ms", "Beatrix", "Buzz", "Edith"]
-    second_name = ["McFly", "Flaps", "Wasp", "Bee", "McBeeFace", "Window-Basher"]
-    name = first_name[random.randint(0, 5)] + " " + second_name[random.randint(0, 5)]
+    first_name = [
+        "Lady", "Stella", "Ms", "Beatrix", "Buzz", "Edith",
+        "Ambrosia", "Abbee", "BEEthoven", "OBEE-Wan", "Bianca", "Chase"
+        ]
+    second_name = [
+        "McFly", "Flaps", "Wasp", "Bee", "McBeeFace", "Window-Basher",
+        "KenoBEE", "McBee", "Barnabee", "Bee", "McBeeFace", "Beelzebub"
+    ]
+    name = first_name[random.randint(0, 11)] + " " + second_name[random.randint(0, 11)]
     return name
+
+def efficiency():
+    honey_prodcution = ["poor", "good", "excellent"]
+    efficiency = honey_prodcution[random.randint(0, 2)]
+    return efficiency
+
+def health():
+    health = ["diseased", "ok", "healthy"]
+    health_rating = health[random.randint(0, 2)]
+    return health_rating
+
 
 #once a user has logged in they can press a button to access the database, this will fill it
 @app.route("/fill_db", methods=["GET", "POST"]) 
@@ -58,26 +75,26 @@ def fill_db():
                 "category_name": "TEST",
                 "task_name": bee_name(),
                 "created_by": session["user"],
-                "honey_production": "good",
-                "health": "diseased"
+                "honey_production": efficiency(),
+                "health": health()
             }, { 
                 "category_name": "Worker Bees",
                 "task_name": bee_name(),
                 "created_by": session["user"],
-                "honey_production": "poor",
-                "health": "healthy"
+                "honey_production": efficiency(),
+                "health": health()
             }, { 
                 "category_name": "Worker Bees",
                 "task_name": bee_name(),
                 "created_by": session["user"],
-                "honey_production": "good",
-                "health": "healthy"
+                "honey_production": efficiency(),
+                "health": health()
             }, { 
                 "category_name": "Worker Bees",
                 "task_name": bee_name(),
                 "created_by": session["user"],
-                "honey_production": "good",
-                "health": "healthy"
+                "honey_production": efficiency(),
+                "health": health()
             }
             
         mongo.db.tasks.insert_many(db_entry)
