@@ -11,6 +11,8 @@
         integrity="sha512-xA6Hp6oezhjd6LiLZynuukm80f8BoZ3OpcEYaqKoCV3HKQDrYjDE1Gu8ocxgxoXmwmSzM4iqPvCsOkQNiu41GA==" crossorigin="anonymous" type="text/css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css" type="text/css">
     
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+
     <link rel="stylesheet" href="{{ url_for('static', filename='css/fullpage.css') }}" type="text/css" />
     <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}" type="text/css">
     
@@ -22,48 +24,47 @@
     
 
     <header>
+      <div class="navbar-fixed">
         <nav class="nav-extended">
             <div class="nav-wrapper">
-              <a href="{{ url_for('get_tasks') }}" class="brand-logo">I🐝M</a>
-              <a href="#" data-target="mobile-demo" class="sidenav-trigger right"><i class="fas fa-bars"></i></a>
-              <ul class="right hide-on-med-and-down">
-                <li><a href="{{ url_for('end_state') }}">end?</a></li>
-                <li><a href="{{ url_for('get_tasks') }}">Home</a></li>
-                {% if session.user %}
+              <ul>
+                <li id="logo-location"><a href="{{ url_for('get_tasks') }}" class="brand-logo left">I🐝M</a></li>
+                <li id="plus-location"><a href="{{ url_for('add_task') }}" ><i class="fas fa-plus"></i></a></li>
+                <li id="search-location">
+                  <form action="{{ url_for('search') }}" method="post"> 
+                    <div class="input-field left" >
+                      <input id="search" type="search" name="search" required>
+                      <label class="label-icon" for="search"><i class="fas fa-search"></i></label>
+                      <i class="material-icons">close</i>
+                    </div>
+                  </form>
+                  
+                </li>
+            </ul>
 
-                  <li><a href="{{ url_for('add_task') }}">New Task</a></li>
-                  {% if session.user|lower == "admin"|lower %}
-                    <li><a href="{{ url_for('get_categories') }}">Manage Categories</a></li>
+            
+              
+            
+
+            <section>
+              <!-- flash messages -->
+              {% with messages = get_flashed_messages() %}
+                  {% if messages %}
+                      {% for message in messages %}
+                          <ul class="flashes right">
+                              <!-- <h6 class="p-4">{{ message }}</h6> -->
+                              <li><a class="btn-flat">{{ message }}<span class="new badge"></span></a></li>
+                          </ul>
+                      {% endfor %}
                   {% endif %}
-                  <li><a href="{{ url_for('logout') }}">Log Out</a></li>
-                {% else %}
-                  <li><a href="{{ url_for('login') }}">Log In</a></li>
-                  <li><a href="{{ url_for('register') }}">Register</a></li>
-                {% endif %}
-              </ul>
-            </div>
-          </nav>
-        
-          <ul class="sidenav" id="mobile-demo">
-            <li><h4 class="center-align light-blue-text text-darken-4">Task Manager</h4></li>
-            <li><a href="{{ url_for('get_tasks') }}">Home</a></li>
-            {% if session.user %}
-
-              <li><a href="{{ url_for('add_task') }}">New Task</a></li>
-              {% if session.user|lower == "admin"|lower %}
-                  <li><a href="{{ url_for('get_categories') }}">Manage Categories</a></li>
-              {% endif %}
-              <li><a href="{{ url_for('logout') }}">Log Out</a></li>
-            {% else %}
-              <li><a href="{{ url_for('login') }}">Log In</a></li>
-              <li><a href="{{ url_for('register') }}">Register</a></li>
-            {% endif %}
-          </ul>
+              {% endwith %}
+          </section>    
+        </div>
+      </nav> 
     </header>
 
-
+<!-- flash messages 
     <section>
-        <!-- flash messages -->
         {% with messages = get_flashed_messages() %}
             {% if messages %}
                 {% for message in messages %}
@@ -74,6 +75,7 @@
             {% endif %}
         {% endwith %}
     </section>
+  -->
 
     <main class="container">
       {% block content %}

@@ -5,4 +5,5 @@ $(document).ready(function () {
   $("select").formSelect();
   $('.modal').modal();
   $('#fullpage').fullpage({});
+  $('.tabs').tabs();
 });

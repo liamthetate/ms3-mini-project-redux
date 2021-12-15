@@ -114,7 +114,7 @@ def register():
         flash("Registration Successful!")
         return redirect(url_for("welcome", username=session["user"])) #takes user to own page url
 
-    return render_template("register.html")
+    return render_template("welcome_task.html")
 
 
 @app.route('/welcome')
@@ -141,37 +141,45 @@ def search_memory():
     return query
 
 
+'''
+def wasps_left():
+    any_wasps = list(mongo.db.tasks.find({"$text": {"$search": "wasp"}}))
+    if any_wasps:
+        flash(str(len(any_wasps)))
+'''
+
 #UI TASKS
-@app.route("/end-state", methods=["GET", "POST"]) 
 def end_state():
     any_wasps = list(mongo.db.tasks.find({"$text": {"$search": "wasp"}}))
     any_poor = list(mongo.db.tasks.find({"$text": {"$search": "poor"}}))
     any_diseased = list(mongo.db.tasks.find({"$text": {"$search": "diseased"}}))
-    any_spielberg = list(mongo.db.tasks.find({"$text": {"$search": "spielberg"}}))
 
-    #if any_wasps and any_poor and any_diseased and any_spielberg:
-        #pass
+    if (len(any_poor)) == 0:
+        if (len(any_diseased)) == 0:
+            if (len(any_wasps)) == 0:
+                return "end"
 
-    if any_wasps:
-        flash(str(len(any_wasps)) + " Wasp still remain")
+#UI TASKS
+def ui():
+    any_wasps = list(mongo.db.tasks.find({"$text": {"$search": "wasp"}}))
+    any_poor = list(mongo.db.tasks.find({"$text": {"$search": "poor"}}))
+    any_diseased = list(mongo.db.tasks.find({"$text": {"$search": "diseased"}}))
+
     if any_poor:
-        flash(str(len(any_poor)) + " poor still remain")
+        flash(str(len(any_poor)) + " 'poor' productivity")
     if any_diseased:
-        flash(str(len(any_diseased)) + " diseased still remain")
-    if any_spielberg:
-        flash(str(len(any_spielberg)) + " spielberg still remain")  
-
-    #else:
-        #flash("WELL DONE CLICK HERE")
-        #return redirect(url_for("end"))
-
-    return render_template("end-state.html") #don't need this anymore
+        flash(str(len(any_diseased)) + " 'diseased'")
+    if any_wasps:
+        flash(str(len(any_wasps)) + " surname 'wasp'")
 
 
 #MAIN GAME SCREEN
 @app.route("/get_tasks")
 def get_tasks():
-    end_state() #gets update on remaining missions
+    ui() #gets UI updates
+    if end_state() == "end":
+        return redirect(url_for('end'))
+
     tasks = list(mongo.db.tasks.find()) #.tasks inside this is referencing the tasks on mongo
     return render_template("tasks.html", tasks=tasks) #takes the taks found in the db and displyas them on page
 
@@ -179,7 +187,8 @@ def get_tasks():
 #SEARCH
 @app.route("/search/", methods=["GET", "POST"]) #GET happens by default so we don't have to write it, unless we want POST
 def search():
-    query = request.form.get("query") #what the user wrote
+    ui()
+    query = request.form.get("search") #what the user wrote
     tasks = list(mongo.db.tasks.find({"$text": {"$search": query}})) #what the database has / 
     return render_template("tasks.html", tasks=tasks) #page render of results
     #return redirect(url_for("get_tasks"))
@@ -199,7 +208,7 @@ def add_task():
             "created_by": session["user"],
         }
         mongo.db.tasks.insert_one(task) 
-        flash("Task Successfully Added")
+        #flash("Task Successfully Added")
         return redirect(url_for("get_tasks"))
 
     categories = mongo.db.categories.find().sort("category_name", 1)
@@ -240,8 +249,8 @@ def delete_task(task_id):
 
 
 #END
-@app.route("/end/<username>", methods=["GET", "POST"])
-def end(username):
+@app.route("/end", methods=["GET", "POST"])
+def end():
 
     mongo.db.tasks.delete_many({}) #deletes game database
 

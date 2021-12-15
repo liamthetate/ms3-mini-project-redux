@@ -40,9 +40,34 @@ a {
 }
 
 
+nav {
+  background-color: rgb(255, 236, 130);
+}
+
+nav li {
+  color: #333;
+}
 
 
+.brand-logo {
+  margin-left: 2%;
 
+}
+
+#logo-location {
+  color: #333;
+  left: 10%;
+}
+
+#plus-location {
+  position: relative;
+  left: 20%;
+}
+
+#search-location {
+  position: relative;
+  left: 20%;
+}
 
 
 .container {
