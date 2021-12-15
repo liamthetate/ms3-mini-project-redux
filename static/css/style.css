@@ -1,7 +1,45 @@
- * {
+
+/* Styling the border and box
+effect of the progress bar*/
+.progress-bar {
+  width: 100%;
+  height: 10px;
+  margin-top: 10px;
+}
+
+/* Stylingthe background color of each
+animation and border radius */
+.percentage {
+  display: block;
+  height: 100%;
+  background-color: #333;
+  animation: progress 1000ms ease-in 1;
+}
+
+/* Assigning width of each languages
+.task-progress {
+  width: 25%;
+}
+
+/* Animating the progress bar by
+initially starting from 0*//* 
+@keyframes progress {
+  from {width: 0%;}
+  to {width: 25%;}
+}
+*/
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+* {
   margin: 0; 
   padding: 0; 
 }
+
 
 /* -------------------------------------------------------- colors */
 

@@ -166,22 +166,50 @@ def ui():
     any_diseased = list(mongo.db.tasks.find({"$text": {"$search": "diseased"}}))
 
     if any_poor:
-        flash(str(len(any_poor)) + " 'poor' productivity")
+        flash("'poor' productivity: " + str(len(any_poor)))
     if any_diseased:
-        flash(str(len(any_diseased)) + " 'diseased'")
+        flash("'diseased': " + str(len(any_diseased)))
     if any_wasps:
-        flash(str(len(any_wasps)) + " surname 'wasp'")
+        flash("surname 'wasp': " + str(len(any_wasps)))
+
+
+def progress_bar():
+    progress_value = 0
+    any_wasps = list(mongo.db.tasks.find({"$text": {"$search": "wasp"}}))
+    any_poor = list(mongo.db.tasks.find({"$text": {"$search": "poor"}}))
+    any_diseased = list(mongo.db.tasks.find({"$text": {"$search": "diseased"}}))
+
+    already_checked_inital_progress_value = False
+    already_checked_wasps = False
+    already_checked_poor = False
+    already_checked_diseased = False
+
+    if len(any_poor) == 0 and already_checked_poor == False:
+        already_checked_poor = True
+        progress_value += 25
+        return progress_value
+    
+    if len(any_wasps) == 0 and already_checked_wasps == False:
+        already_checked_wasps = True
+        progress_value += 25
+        return progress_value
+
+    if len(any_diseased) == 0 and already_checked_diseased == False:
+        already_checked_diseased = True
+        progress_value += 25
+        return progress_value
 
 
 #MAIN GAME SCREEN
 @app.route("/get_tasks")
 def get_tasks():
+    progress_value = progress_bar()
     ui() #gets UI updates
     if end_state() == "end":
         return redirect(url_for('end'))
 
     tasks = list(mongo.db.tasks.find()) #.tasks inside this is referencing the tasks on mongo
-    return render_template("tasks.html", tasks=tasks) #takes the taks found in the db and displyas them on page
+    return render_template("tasks.html", tasks=tasks, progress_value=progress_value) #takes the taks found in the db and displyas them on page
 
 
 #SEARCH
@@ -246,6 +274,27 @@ def delete_task(task_id):
     #flash("Thank you! The Bee is under investigation by authorities")
     #return render_template("tasks.html")
     return redirect(url_for("get_tasks"))
+
+
+
+#DELETE MULTIPLE TASKS
+@app.route("/delete_multiple", methods=["GET", "POST"])
+def delete_multiple():
+        test = request.form.get('mycheckbox')
+        #test = request.form.getlist('task._id') #getlist returns []
+        flash(test)
+'''
+    if request.method == "POST":
+        test = request.form.get('mycheckbox')
+        #test = request.form.getlist('task._id') #getlist returns []
+        flash(test)
+'''
+    #for getid in request.form.getlist(format('mycheckbox')):
+        #flash("TESTING")
+        #mongo.db.tasks.delete_one({"_id": ObjectId(getid)})
+    #return redirect(url_for("get_tasks"))
+
+
 
 
 #END

@@ -17,6 +17,18 @@
     <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}" type="text/css">
     
     {% block styles %}
+        <style>
+            .task-progress {
+            width: {{ progress_value }}%;
+          }
+          
+          /* Animating the progress bar by
+          initially starting from 0*/
+          @keyframes progress {
+            from {width: 0%;}
+            to {width: {{ progress_value }}%;}
+          }
+        </style>
     {% endblock %}
     <title>Task Manager</title>
 </head>
@@ -38,13 +50,21 @@
                       <i class="material-icons">close</i>
                     </div>
                   </form>
-                  
                 </li>
             </ul>
 
-            
-              
-            
+
+            <section>
+              <!-- flash messages -->
+              {% with messages = get_flashed_messages() %}
+                  {% if messages == toal_number %}
+                      {% for message in messages %}
+                              <li><a class="btn-flat">{{ message }}</a></li>
+                          </ul>
+                      {% endfor %}
+                  {% endif %}
+              {% endwith %}
+          </section>   
 
             <section>
               <!-- flash messages -->
@@ -53,15 +73,23 @@
                       {% for message in messages %}
                           <ul class="flashes right">
                               <!-- <h6 class="p-4">{{ message }}</h6> -->
-                              <li><a class="btn-flat">{{ message }}<span class="new badge"></span></a></li>
+                              <li><a class="btn-flat">{{ message }}<span class="new badge red" data-badge-caption="!"></span></a></li>
                           </ul>
                       {% endfor %}
                   {% endif %}
               {% endwith %}
           </section>    
         </div>
+
+        <div class="progress-bar-container">
+          <div class="progress-bar">
+              <span class="percentage task-progress"></span>
+          </div>
+        </div>
+
       </nav> 
     </header>
+    
 
 <!-- flash messages 
     <section>
