@@ -16,18 +16,6 @@ animation and border radius */
   animation: progress 1000ms ease-in 1;
 }
 
-/* Assigning width of each languages
-.task-progress {
-  width: 25%;
-}
-
-/* Animating the progress bar by
-initially starting from 0*//* 
-@keyframes progress {
-  from {width: 0%;}
-  to {width: 25%;}
-}
-*/
  
  
  
@@ -46,6 +34,16 @@ initially starting from 0*//*
 a {
   color: #333;
 }
+
+
+#logo-color,
+#plus-color,
+#search-color {
+  color: #333;
+}
+
+
+
 
 /* label color */
 .input-field label {

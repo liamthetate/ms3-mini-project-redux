@@ -57,10 +57,25 @@ def automated_db():
             }
     return db_template
 
+def wasp_db():
+    db_template = { 
+            "category_name": "TEST",
+            "task_name": "Mr Wasp",
+            "created_by": session["user"],
+            "honey_production": efficiency(),
+            "health": health()
+            }
+    return db_template
+
+
+
 
 def plant_database():
     for i in range(20): #creates database on load of page, 20 is number of bees in hive
-        mongo.db.tasks.insert_one(automated_db()) 
+        mongo.db.tasks.insert_one(automated_db())
+    
+    for i in range(3): 
+        mongo.db.tasks.insert_one(wasp_db()) 
 
 
 #GAME START 
@@ -119,8 +134,9 @@ def register():
 
 @app.route('/welcome')
 def welcome():
+    progress_value = 0
     plant_database()
-    return render_template('welcome_task.html')
+    return render_template('welcome_task.html', progress_value=progress_value)
 
 
 #DEBUG TOOLS
@@ -148,63 +164,54 @@ def wasps_left():
         flash(str(len(any_wasps)))
 '''
 
-#UI TASKS
-def end_state():
-    any_wasps = list(mongo.db.tasks.find({"$text": {"$search": "wasp"}}))
-    any_poor = list(mongo.db.tasks.find({"$text": {"$search": "poor"}}))
-    any_diseased = list(mongo.db.tasks.find({"$text": {"$search": "diseased"}}))
 
-    if (len(any_poor)) == 0:
-        if (len(any_diseased)) == 0:
-            if (len(any_wasps)) == 0:
-                return "end"
 
-#UI TASKS
-def ui():
+#UI TASKS ORDERED
+def ui_tasks():
     any_wasps = list(mongo.db.tasks.find({"$text": {"$search": "wasp"}}))
     any_poor = list(mongo.db.tasks.find({"$text": {"$search": "poor"}}))
     any_diseased = list(mongo.db.tasks.find({"$text": {"$search": "diseased"}}))
 
     if any_poor:
-        flash("'poor' productivity: " + str(len(any_poor)))
-    if any_diseased:
-        flash("'diseased': " + str(len(any_diseased)))
-    if any_wasps:
-        flash("surname 'wasp': " + str(len(any_wasps)))
+        flash("🍯  poor productivity = " + str(len(any_poor)))
+
+    if (len(any_poor)) == 0:
+        if any_diseased:
+            flash("🩸 diseased = " + str(len(any_diseased)))
+    
+        if (len(any_diseased)) == 0:
+            if any_wasps:
+                flash("surname 'wasp' = " + str(len(any_wasps)))
+
+            #if (len(any_wasps)) == 0:
+            #    flash("DONE!")
+
 
 
 def progress_bar():
-    progress_value = 0
-    any_wasps = list(mongo.db.tasks.find({"$text": {"$search": "wasp"}}))
+    progress_value = 10
+
     any_poor = list(mongo.db.tasks.find({"$text": {"$search": "poor"}}))
-    any_diseased = list(mongo.db.tasks.find({"$text": {"$search": "diseased"}}))
+    if len(any_poor) == 0:
+        progress_value = 33
 
-    already_checked_inital_progress_value = False
-    already_checked_wasps = False
-    already_checked_poor = False
-    already_checked_diseased = False
+        any_diseased = list(mongo.db.tasks.find({"$text": {"$search": "diseased"}}))
+        if len(any_diseased) == 0:
+            progress_value = 66
 
-    if len(any_poor) == 0 and already_checked_poor == False:
-        already_checked_poor = True
-        progress_value += 25
-        return progress_value
-    
-    if len(any_wasps) == 0 and already_checked_wasps == False:
-        already_checked_wasps = True
-        progress_value += 25
-        return progress_value
+        any_wasps = list(mongo.db.tasks.find({"$text": {"$search": "wasp"}}))
+        if len(any_wasps) == 0:
+            progress_value = 99
 
-    if len(any_diseased) == 0 and already_checked_diseased == False:
-        already_checked_diseased = True
-        progress_value += 25
-        return progress_value
+    return progress_value
 
 
 #MAIN GAME SCREEN
 @app.route("/get_tasks")
 def get_tasks():
+    session.pop('_flashes', None)
     progress_value = progress_bar()
-    ui() #gets UI updates
+    ui_tasks() 
     if end_state() == "end":
         return redirect(url_for('end'))
 
@@ -215,10 +222,11 @@ def get_tasks():
 #SEARCH
 @app.route("/search/", methods=["GET", "POST"]) #GET happens by default so we don't have to write it, unless we want POST
 def search():
-    ui()
+    progress_value = progress_bar()
+    ui_tasks()
     query = request.form.get("search") #what the user wrote
     tasks = list(mongo.db.tasks.find({"$text": {"$search": query}})) #what the database has / 
-    return render_template("tasks.html", tasks=tasks) #page render of results
+    return render_template("tasks.html", tasks=tasks, progress_value=progress_value) #page render of results
     #return redirect(url_for("get_tasks"))
 
 
@@ -227,44 +235,40 @@ def search():
 #ADD TASK
 @app.route("/add_task", methods=["GET", "POST"])
 def add_task():
+    progress_value = progress_bar()
+    ui_tasks()
     if request.method == "POST":
-        is_urgent = "on" if request.form.get("is_urgent") else "off"
         task = { #get all the values the user has typed
             "task_name": request.form.get("task_name"),
             "honey_production": request.form.get("honey_production"),
             "health": request.form.get("health"),
-            "created_by": session["user"],
         }
         mongo.db.tasks.insert_one(task) 
-        #flash("Task Successfully Added")
         return redirect(url_for("get_tasks"))
 
-    categories = mongo.db.categories.find().sort("category_name", 1)
-    return render_template("add_task.html", categories=categories) #display the catgeoires on the page that are in db
+    #categories = mongo.db.categories.find().sort("category_name", 1)
+    return render_template("add_task.html", progress_value=progress_value) #display the catgeoires on the page that are in db
 
 
 #EDIT TASK
 @app.route("/edit_task/<task_id>", methods=["GET", "POST"])
 def edit_task(task_id):
+    progress_value = progress_bar()
+    ui_tasks()
     if request.method == "POST":
         is_urgent = "on" if request.form.get("is_urgent") else "off"
         submit = { #get all the values the user has typed
-            "category_name": request.form.get("category_name"),
             "task_name": request.form.get("task_name"),
-            "task_description": request.form.get("task_description"),
-            "is_urgent": is_urgent,
-            "due_date": request.form.get("due_date"),
-            "created_by": session["user"],
             "honey_production": request.form.get("honey_production"),
             "health": request.form.get("health"),
         }
         mongo.db.tasks.update_one({"_id": ObjectId(task_id)}, {"$set": submit}) #code fix for tutorial error
-        flash("Task Successfully Updated")
+        #flash("Task Successfully Updated")
         return redirect(url_for("get_tasks"))
 
     task = mongo.db.tasks.find_one({"_id": ObjectId(task_id)})
     categories = mongo.db.categories.find().sort("category_name", 1)
-    return render_template("edit_task.html", task=task, categories=categories) #display task & cats fround in db
+    return render_template("edit_task.html", task=task, progress_value=progress_value) #display task & cats fround in db
 
 
 #DELETE TASK
@@ -295,9 +299,19 @@ def delete_multiple():
     #return redirect(url_for("get_tasks"))
 
 
+#CHECKS TO SEE IF GAME IS OVER
+def end_state():
+    any_wasps = list(mongo.db.tasks.find({"$text": {"$search": "wasp"}}))
+    any_poor = list(mongo.db.tasks.find({"$text": {"$search": "poor"}}))
+    any_diseased = list(mongo.db.tasks.find({"$text": {"$search": "diseased"}}))
+
+    if (len(any_poor)) == 0:
+        if (len(any_diseased)) == 0:
+            if (len(any_wasps)) == 0:
+                return "end"
 
 
-#END
+#END / deletes game database
 @app.route("/end", methods=["GET", "POST"])
 def end():
 
@@ -311,7 +325,7 @@ def end():
     return render_template("end.html")
 
 
-#LOGOUT
+#LOGOUT / DESTROY ALL DATA
 @app.route("/logout")
 def logout():
     mongo.db.users.delete_one(
