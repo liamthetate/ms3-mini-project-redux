@@ -18,7 +18,9 @@
 }
 
 
- 
+#ui-multi-display li {
+  padding: 50px;
+}
  
  
  
@@ -34,6 +36,9 @@ a {
   color: #333;
 }
 
+#general-color {
+  color: #333;
+}
 
 #logo-color,
 #plus-color,
@@ -86,15 +91,14 @@ nav li {
   color: #333;
 }
 
-
 .brand-logo {
   margin-left: 2%;
-
+  top:4px;
 }
 
 #logo-location {
   color: #333;
-  left: 5%;
+  left: 5px;
 }
 
 #plus-location {
@@ -109,6 +113,14 @@ nav li {
   top: 5px;
 }
 
+#bee-pic {
+  max-width:300px;
+}
+
+#bee-name-symbol {
+  margin: 10px;
+  max-width:20px;
+}
 
 .container {
   width: 100% !important;

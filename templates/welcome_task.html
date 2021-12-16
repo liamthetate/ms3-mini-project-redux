@@ -1,42 +1,41 @@
 {% extends "base.html" %}
 {% block content %}
 
-    <h3 class="light-blue-text text-dark-4 center-align">Welcome {{ username }}</h3>
+    <h3 class="center-align">Welcome {{ username }}</h3>
+    <p class="center-align">The database is almost complete, just add this last entry!</p>
 
     <div class="row card-panel grey lighten-5">
 
         <div class="col m6">
-          <img src="/static/images/IBM-book.jpg">
+          <img src="/static/images/welcome_bee_small.png" id="bee-pic">
         </div>
 
         <form class="col m6" method="POST" action="{{ url_for('add_task') }}"> <!-- triggers python add_task -->
 
           <div class="row">
             <div class="input-field col s12">
-              <i class="fas fa-pencil-alt prefix light-blue-text text-darken-4"></i>
-              <input id="task_name" name="task_name" minlength="5" maxlength="50"
+              <img src="/static/images/symbol2.png" id="bee-name-symbol" class="prefix">
+              <input id="task_name" name="task_name" minlength="2" maxlength="50"
               type="text" class="validate" required>
               <label for="task_name">Bee Name</label>
             </div>
           </div>
             <div class="input-field col s12">
-              <i class="fas fa-align-left prefix light-blue-text text-darken-4"></i>
-              <textarea id="honey_production" name="honey_production" minlength="4"
-                maxlength="50" class="materialize-textarea validate" required placeholder="Good or Poor"></textarea>
+              <textarea id="honey_production" name="honey_production" minlength="2"
+                maxlength="50" class="materialize-textarea validate" required></textarea>
               <label for="honey_production">Honey Productivity</label>
             </div>
 
             <div class="input-field col s12">
-              <i class="fas fa-align-left prefix light-blue-text text-darken-4"></i>
-              <textarea id="health" name="health" minlength="4"
-                maxlength="50" class="materialize-textarea validate" required placeholder="Healthy or Diseased"></textarea>
+              <textarea id="health" name="health" minlength="2"
+                maxlength="50" class="materialize-textarea validate" required></textarea>
               <label for="health">Health</label>
             </div>
           
             <div class="row">
                 <div class="col s12 center-align">
-                    <button class="submit btn-large light-blue darken-1 text-shadow"> <!-- submit triggers python -->
-                        Add Bee <i class="fas fa-plus-square right"></i>
+                    <button class="submit btn-large yellow" id="plus-color"> <!-- submit triggers python -->
+                        Add Bee <i class="fas fa-plus"></i>
                     </button>
                 </div>
             </div>

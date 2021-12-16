@@ -128,16 +128,11 @@ def fill_db_button():
     for i in range(20): #number of bees in hive
         mongo.db.tasks.insert_one(automated_db())
     return redirect("get_tasks")
-#DEBUG TOOLS
+
 @app.route("/delete-all", methods=["GET", "POST"]) 
 def delete_all():
     mongo.db.tasks.delete_many({})
     return redirect("get_tasks")
-#AN ATTEMPT TO RETAIN SEARCH ENGINE RESULTS
-def search_memory():
-    query = request.form.get("query")
-    print(query)
-    return query
 
 
 #UI TASKS ORDERED
@@ -159,7 +154,26 @@ def ui_tasks():
 
             if (len(any_wasps)) == 0:
                 flash("Purge Complete!")
+'''
 
+#UI TASKS ALL AT ONCE
+def ui_tasks():
+    any_wasps = list(mongo.db.tasks.find({"$text": {"$search": "wasp"}}))
+    any_poor = list(mongo.db.tasks.find({"$text": {"$search": "poor"}}))
+    any_diseased = list(mongo.db.tasks.find({"$text": {"$search": "diseased"}}))
+
+    if any_poor:
+        flash("🍯  poor productivity = " + str(len(any_poor)))
+
+    if any_diseased:
+        flash("🩸 diseased = " + str(len(any_diseased)))
+    
+    if any_wasps:
+        flash("Surname 'wasp' = " + str(len(any_wasps)))
+
+    if (len(any_wasps)) == 0 and (len(any_poor)) == 0 and (len(any_diseased)) == 0:
+        flash("Purge Complete!")
+'''
 
 def progress_bar():
     progress_value = 10
