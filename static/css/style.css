@@ -186,10 +186,13 @@ a {
 }
 
 #game-title {
+  display: flex;
   font-size: 10rem;
-  position: relative;
   top: 10%;
+  max-width: 100%;
+  align-items: center;
   justify-content: center;
+
 }
 
 #game-subtitle {
@@ -243,7 +246,6 @@ https://codepen.io/seolan/pen/jbGyxq*/
   font-size: 8em;
   margin-top: 200px;
   max-width: 100%;
-
 }
 
 #congrats-subtitle {
