@@ -1,17 +1,9 @@
 {% extends "base.html" %}
 
 {% block content %}
-
-    <p>WELCOME! Her is one thing to do</p>
-
-    
-
-    <div class="row card-panel grey lighten-5 s12">
-      <div class="col s6">
-        <img src="/static/images/IBM-book.jpg">
-      </div>
-
-        <form class="col s6" method="POST" action="{{ url_for('add_task') }}"> <!-- triggers python add_task -->
+    <br>
+    <br>
+        <form class="col s12" method="POST" action="{{ url_for('add_task') }}"> <!-- triggers python add_task -->
 
           <div class="row">
             <div class="input-field col s12">

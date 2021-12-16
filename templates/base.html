@@ -40,11 +40,16 @@
         <nav class="nav-extended">
             <div class="nav-wrapper">
               <ul>
-                <li id="logo-location"><a href="{{ url_for('get_tasks') }}" class="brand-logo left" id="logo-color">I🐝M</a></li>
-                <li id="plus-location"><a href="{{ url_for('add_task') }}" ><i class="fas fa-plus" id="plus-color"></i></a></li>
+                <li id="logo-location">
+                  <a href="{{ url_for('get_tasks') }}" class="brand-logo left tooltipped" data-position="bottom" data-tooltip="Database"
+                  id="logo-color">I🐝M</a></li>
+
+                <li id="plus-location"><a href="{{ url_for('add_task') }}" class="tooltipped" data-position="bottom" data-tooltip="Add Entry">
+                  <i class="fas fa-plus" id="plus-color"></i></a></li>
+
                 <li id="search-location">
                   <form action="{{ url_for('search') }}" method="post"> 
-                    <div class="input-field left" >
+                    <div class="input-field left tooltipped" data-position="bottom" data-tooltip="Search">
                       <input id="search" type="search" name="search" required>
                       <label class="label-icon" for="search"><i class="fas fa-search" id="search-color"></i></label>
                       <i class="material-icons">close</i>
@@ -60,9 +65,17 @@
               {% with messages = get_flashed_messages() %}
                   {% if messages %}
                       {% for message in messages %}
+                        {% if message != "Purge Complete!" %}
                           <ul class="flashes right">
-                              <li><a class="btn-flat"><span class="new badge red" data-badge-caption="{{ message }}"></span></a></li>
+                              <li><a class="btn-flat tooltipped" data-position="bottom" data-tooltip="Your task">
+                                <span class="new badge red" data-badge-caption="{{ message }}"></span></a></li>
                           </ul>
+                          {% else %}
+                          <ul class="flashes right">
+                            <li><a href="/end" class="btn-flat tooltipped" data-position="bottom" data-tooltip="{{ message }}">
+                              <span class="new badge red pulse" data-badge-caption="{{ message }} CLICK HERE!"></span></a></li>
+                        </ul>
+                        {% endif %}
                       {% endfor %}
                   {% endif %}
               {% endwith %}

@@ -1,5 +1,7 @@
 import os
 import random #for game data
+import time
+
 from flask import (
     Flask, flash, render_template, #flash is the prompts for the user
     redirect, request, session, url_for) #request reads forms from the user
@@ -138,15 +140,6 @@ def search_memory():
     return query
 
 
-'''
-def wasps_left():
-    any_wasps = list(mongo.db.tasks.find({"$text": {"$search": "wasp"}}))
-    if any_wasps:
-        flash(str(len(any_wasps)))
-'''
-
-
-
 #UI TASKS ORDERED
 def ui_tasks():
     any_wasps = list(mongo.db.tasks.find({"$text": {"$search": "wasp"}}))
@@ -164,9 +157,8 @@ def ui_tasks():
             if any_wasps:
                 flash("surname 'wasp' = " + str(len(any_wasps)))
 
-            #if (len(any_wasps)) == 0:
-            #    flash("DONE!")
-
+            if (len(any_wasps)) == 0:
+                flash("Purge Complete!")
 
 
 def progress_bar():
@@ -182,7 +174,7 @@ def progress_bar():
 
         any_wasps = list(mongo.db.tasks.find({"$text": {"$search": "wasp"}}))
         if len(any_wasps) == 0:
-            progress_value = 99
+            progress_value = 100
 
     return progress_value
 
@@ -192,11 +184,14 @@ def progress_bar():
 def get_tasks():
     session.pop('_flashes', None)
     progress_value = progress_bar()
-    ui_tasks() 
-    if end_state() == "end":
-        return redirect(url_for('end'))
+    ui_tasks()
+    tasks = list(mongo.db.tasks.find())
 
-    tasks = list(mongo.db.tasks.find()) #.tasks inside this is referencing the tasks on mongo
+    #if end_state() == "end":
+    #    return render_template("tasks.html", tasks=tasks, progress_value=progress_value)
+        
+
+     #.tasks inside this is referencing the tasks on mongo
     return render_template("tasks.html", tasks=tasks, progress_value=progress_value) #takes the taks found in the db and displyas them on page
 
 
@@ -265,25 +260,13 @@ def delete_task(task_id):
 #DELETE MULTIPLE TASKS
 @app.route("/delete_multiple", methods=["GET", "POST"])
 def delete_multiple():
-        #test = request.form.get('mycheckbox')
         list = request.form.getlist('mycheckbox') #getlist returns []
-        flash(list)
         length_of_list = len(list)
         for i in range(length_of_list):
             mongo.db.tasks.delete_one({"_id": ObjectId(list[i])})
         return redirect(url_for("get_tasks"))
-'''
-    if request.method == "POST":
-        test = request.form.get('mycheckbox')
-        #test = request.form.getlist('task._id') #getlist returns []
-        flash(test)
-'''
-    #for getid in request.form.getlist(format('mycheckbox')):
-        #flash("TESTING")
-        #mongo.db.tasks.delete_one({"_id": ObjectId(getid)})
-    #return redirect(url_for("get_tasks"))
 
-
+'''
 #CHECKS TO SEE IF GAME IS OVER
 def end_state():
     any_wasps = list(mongo.db.tasks.find({"$text": {"$search": "wasp"}}))
@@ -294,27 +277,24 @@ def end_state():
         if (len(any_diseased)) == 0:
             if (len(any_wasps)) == 0:
                 return "end"
-
+'''
 
 #END / deletes game database
 @app.route("/end", methods=["GET", "POST"])
 def end():
-
-    mongo.db.tasks.delete_many({}) #deletes game database
-
+    mongo.db.tasks.delete_many({}) #deletes GAME database
     username = mongo.db.users.find_one(
         {"username": session["user"]})["username"]
-    if session["user"]:
-        return render_template("end.html", username=username)
-
-    return render_template("end.html")
+    #if session["user"]:
+    #    return render_template("end.html", username=username)
+    return render_template("end.html", username=username)
 
 
 #LOGOUT / DESTROY ALL DATA
 @app.route("/logout")
 def logout():
     mongo.db.users.delete_one(
-        {"username": session["user"]}) #destroys all data
+        {"username": session["user"]}) #destroys all USER data
     session.pop("user") # remove user from session cookie
     return render_template("logged_out.html")
 
