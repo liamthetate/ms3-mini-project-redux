@@ -141,21 +141,21 @@ def ui_tasks():
     any_poor = list(mongo.db.tasks.find({"$text": {"$search": "poor"}}))
     any_diseased = list(mongo.db.tasks.find({"$text": {"$search": "diseased"}}))
 
-    if any_poor:
-        flash("🍯  poor = " + str(len(any_poor)))
+    if any_diseased:
+        flash("🩸 diseased = " + str(len(any_diseased)) + " bees")
 
-    if (len(any_poor)) == 0:
-        if any_diseased:
-            flash("🩸 diseased = " + str(len(any_diseased)))
+    if (len(any_diseased)) == 0:
+        if any_poor:
+            flash("🍯  poor productivity = " + str(len(any_poor)) + " bees")
     
-        if (len(any_diseased)) == 0:
+        if (len(any_poor)) == 0:
             if any_wasps:
                 flash("'wasp' = " + str(len(any_wasps)))
 
             if (len(any_wasps)) == 0:
                 flash("Purge Complete!")
-'''
 
+'''
 #UI TASKS ALL AT ONCE
 def ui_tasks():
     any_wasps = list(mongo.db.tasks.find({"$text": {"$search": "wasp"}}))
@@ -280,47 +280,30 @@ def delete_multiple():
             mongo.db.tasks.delete_one({"_id": ObjectId(list[i])})
         return redirect(url_for("get_tasks"))
 
-'''
-#CHECKS TO SEE IF GAME IS OVER
-def end_state():
-    any_wasps = list(mongo.db.tasks.find({"$text": {"$search": "wasp"}}))
-    any_poor = list(mongo.db.tasks.find({"$text": {"$search": "poor"}}))
-    any_diseased = list(mongo.db.tasks.find({"$text": {"$search": "diseased"}}))
-
-    if (len(any_poor)) == 0:
-        if (len(any_diseased)) == 0:
-            if (len(any_wasps)) == 0:
-                return "end"
-'''
 
 #END / deletes game database
-@app.route("/end")
+@app.route("/end", methods=["GET", "POST"])
 def end():
     mongo.db.tasks.delete_many({}) #deletes GAME database
     username = mongo.db.users.find_one(
         {"username": session["user"]})["username"]
     all_data = mongo.db.users.find_one({})
-    '''  
-    full_name = mongo.db.users.find_one(
-        {"full_name": session["user"]})["full_name"]
-    address = mongo.db.users.find_one(
-        {"address": session["user"]})["address"]
-    phone = mongo.db.users.find_one(
-        {"phone": session["user"]})["phone"]
-    '''
+
+    if request.method == "POST":
+        mongo.db.users.delete_one(  #destroys all USER data
+            {"username": session["user"]}) 
+        session.pop("user") # remove user from session cookie
+
     return render_template("end.html", username=username, all_data=all_data)
 
 
 #LOGOUT / DESTROY ALL DATA
 @app.route("/logout")
 def logout():
-    mongo.db.users.delete_one(  #destroys all USER data
-        {"username": session["user"]}) 
-    session.pop("user") # remove user from session cookie
     return render_template("logged_out.html")
 
 
 if __name__ == "__main__":
     app.run(host=os.environ.get("IP"),
             port=int(os.environ.get("PORT")), 
-            debug=True) #DELETE
+            )

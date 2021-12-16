@@ -43,7 +43,8 @@
 
     {% if tasks|length > 0 %}
     <form action="/delete_multiple" method="post">
-        <input type="submit" value="REPORT all selected" class="btn-small red" onclick="M.toast({html: 'Reported! Good Job!', classes: 'rounded'})">
+        <input type="submit" value="REPORT all selected" class="btn-small red"
+        onclick="M.toast({html: 'Reported! Good Job!', classes: 'rounded'})">
         {% for task in tasks %}
         <ul class="collection">
             <li class="collection-item avatar">
@@ -68,7 +69,7 @@
                         <img src="/static/images/symbol2.png" width="10px">
                         <span class="title">{{ task.task_name }}<br>
                         {{ task.honey_production }}<br>
-                        {{ task.health }}</p></span>
+                        {{ task.health }}</span>
 
                         
                     </div>
@@ -76,6 +77,8 @@
             </li>
         </ul>
         {% endfor %}
+        <input type="submit" value="REPORT all selected" class="btn-small red"
+        onclick="M.toast({html: 'Reported! Good Job!', classes: 'rounded'})">
     </form>
 
     {% else %}
