@@ -99,8 +99,8 @@ def start():
         # put the new user into 'session' cookie
         session["user"] = request.form.get("username").lower() #gets username
         flash("Registration Successful!")
-        return redirect(url_for("welcome", username=session["user"])) #takes user to own page url
-
+        return redirect(url_for("welcome", username=session["user"]))
+        
     return render_template("start.html")
 
 

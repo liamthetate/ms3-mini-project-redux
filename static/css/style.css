@@ -189,6 +189,7 @@ a {
   font-size: 10rem;
   position: relative;
   top: 10%;
+  justify-content: center;
 }
 
 #game-subtitle {
