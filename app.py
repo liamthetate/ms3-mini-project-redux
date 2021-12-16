@@ -142,7 +142,7 @@ def ui_tasks():
     any_diseased = list(mongo.db.tasks.find({"$text": {"$search": "diseased"}}))
 
     if any_poor:
-        flash("🍯  poor productivity = " + str(len(any_poor)))
+        flash("🍯  poor = " + str(len(any_poor)))
 
     if (len(any_poor)) == 0:
         if any_diseased:
@@ -150,7 +150,7 @@ def ui_tasks():
     
         if (len(any_diseased)) == 0:
             if any_wasps:
-                flash("surname 'wasp' = " + str(len(any_wasps)))
+                flash("'wasp' = " + str(len(any_wasps)))
 
             if (len(any_wasps)) == 0:
                 flash("Purge Complete!")

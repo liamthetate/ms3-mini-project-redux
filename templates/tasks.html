@@ -5,7 +5,7 @@
         <div class="col s12 center">
             <br>
             <br>
-            <p class="center">
+            <p class="center" id="general-font-size">
                 <i class="fas fa-exclamation"></i>
                  The system has detected inefficient bees. See red box above. Search and ALERT
                 <i class="fas fa-exclamation"></i>
@@ -30,7 +30,7 @@
         </div>
     </div>
 
-<!-- 
+    <!-- 
     <form action="/fill-db-button">
         <input type="submit" value="Fill DataBase" />
     </form>
@@ -38,7 +38,7 @@
     <form action="/delete-all">
         <input type="submit" value="Delete All" />
     </form>
--->
+    -->
 
     {% if tasks|length > 0 %}
     <form action="/delete_multiple" method="post">

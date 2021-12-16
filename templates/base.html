@@ -62,11 +62,11 @@
                     {% if messages %}
                         {% for message in messages %}
                           {% if message != "Purge Complete!" %}
-                            <li class="right"><a class="btn-flat tooltipped" data-position="bottom" data-tooltip="Your task">
-                                  <span class="new badge red" data-badge-caption="{{ message }}"></span></a></span>
+                            <li class="right"><a class="tooltipped red pulse btn z-depth-0"
+                              data-position="bottom" data-tooltip="Your task">{{ message }}</a></li>
                             {% else %}
-                              <li class="right"><a href="/end" class="btn-flat tooltipped" data-position="bottom" data-tooltip="CLICK HERE!">
-                                <span class="new badge red pulse" data-badge-caption="{{ message }} Hive efficiency 100%! CLICK HERE!"></span></a></span>
+                              <li class="right"><a href="/end" class="tooltipped red pulse btn z-depth-0">
+                                {{ message }} Hive efficiency 100%! CLICK HERE!</a></span>
                           {% endif %}
                         {% endfor %}
                     {% endif %}

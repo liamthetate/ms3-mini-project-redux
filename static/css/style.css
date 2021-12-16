@@ -23,12 +23,14 @@
 }
  
  
- 
 * {
   margin: 0; 
   padding: 0; 
 }
 
+body {
+  background-color: white;
+}
 
 /* -------------------------------------------------------- colors */
 
@@ -51,6 +53,9 @@ a {
 }
 
 
+#general-font-size {
+ font-size: 1.5rem;
+}
 
 /* label color */
 .input-field label {
