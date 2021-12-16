@@ -7,9 +7,10 @@
             <br>
             <p class="center" id="general-font-size">
                 <i class="fas fa-exclamation"></i>
-                 The system has detected inefficient bees. See red box above. Search and ALERT
+                 The system has detected inefficient bees
                 <i class="fas fa-exclamation"></i>
             </p>
+            <p>Check the criteria in the flashing red box above and then REPORT any corresponding problem bees</p>
             <!-- 
             <div id="flashes center" >
                 {% with messages = get_flashed_messages() %}
@@ -42,7 +43,7 @@
 
     {% if tasks|length > 0 %}
     <form action="/delete_multiple" method="post">
-        <input type="submit" value="Alert all selected" class="btn-small red" onclick="M.toast({html: 'Reported! Good Job!', classes: 'rounded'})">
+        <input type="submit" value="REPORT all selected" class="btn-small red" onclick="M.toast({html: 'Reported! Good Job!', classes: 'rounded'})">
         {% for task in tasks %}
         <ul class="collection">
             <li class="collection-item avatar">
@@ -62,7 +63,7 @@
                         
                         <a href="{{ url_for('delete_task', task_id=task._id) }}"
                         onclick="M.toast({html: 'Bee Reported', classes: 'rounded'})"
-                        class="btn-small red accent-4 waves-effect waves-white">Alert?</a>
+                        class="btn-small red accent-4 waves-effect waves-white">Report?</a>
 
                         <img src="/static/images/symbol2.png" width="10px">
                         <span class="title">{{ task.task_name }}<br>
