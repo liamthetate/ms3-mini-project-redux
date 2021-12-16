@@ -51,69 +51,39 @@ def automated_db():
     db_template = { 
             "category_name": "TEST",
             "task_name": bee_name(),
-            "created_by": session["user"],
             "honey_production": efficiency(),
             "health": health()
             }
     return db_template
+
 
 def wasp_db():
     db_template = { 
             "category_name": "TEST",
-            "task_name": "Mr Wasp",
-            "created_by": session["user"],
-            "honey_production": efficiency(),
-            "health": health()
+            "task_name": "Ok, you got me, I'm a Wasp",
+            "honey_production": "🍯🍯🍯🍯🍯 excellent",
+            "health": "🩸🩸🩸🩸🩸 healthy"
             }
     return db_template
-
-
 
 
 def plant_database():
     for i in range(20): #creates database on load of page, 20 is number of bees in hive
         mongo.db.tasks.insert_one(automated_db())
-    
-    for i in range(3): 
-        mongo.db.tasks.insert_one(wasp_db()) 
+    mongo.db.tasks.insert_one(wasp_db()) #at least one wasp in the db!
 
 
 #GAME START 
 @app.route("/") 
 @app.route("/start", methods=["GET", "POST"])
 def start():
-    if request.method == "POST": 
-        existing_user = mongo.db.users.find_one( 
-            {"username": request.form.get("username").lower()})
-
-        if existing_user:
-            flash("Username already exists") #settings for flash to be found on base.html
-            return redirect(url_for("register")) #basically try again
-
-        register = { #gets values from users form
-            "username": request.form.get("username").lower(),
-            "password": generate_password_hash(request.form.get("password"))
-        }
-        mongo.db.users.insert_one(register) #adds those values into the db
-
-        # put the new user into 'session' cookie
-        session["user"] = request.form.get("username").lower() #gets username
-        flash("Registration Successful!")
-        return redirect(url_for("welcome", username=session["user"])) #takes user to own page url
-
-    return render_template("start.html")
-
-
-#REGISTER
-@app.route("/register", methods=["GET", "POST"])
-def register():
     if request.method == "POST": #has use tried to post info? then...
         existing_user = mongo.db.users.find_one( # look at 'users' on db and see if they are there
             {"username": request.form.get("username").lower()})
 
         if existing_user:
             flash("Username already exists") #settings for flash to be found on base.html
-            return redirect(url_for("register")) #basically try again
+            return redirect(url_for("start")) #basically try again
 
         register = { #gets values from users form
             "username": request.form.get("username").lower(),
@@ -129,13 +99,24 @@ def register():
         flash("Registration Successful!")
         return redirect(url_for("welcome", username=session["user"])) #takes user to own page url
 
-    return render_template("welcome_task.html")
+    return render_template("start.html")
 
 
-@app.route('/welcome')
+
+@app.route('/welcome', methods=["GET", "POST"])
 def welcome():
     progress_value = 0
     plant_database()
+
+    if request.method == "POST":
+        task = { #get all the values the user has typed
+            "task_name": request.form.get("task_name"),
+            "honey_production": request.form.get("honey_production"),
+            "health": request.form.get("health"),
+        }
+        mongo.db.tasks.insert_one(task) 
+        return redirect(url_for("get_tasks"))
+
     return render_template('welcome_task.html', progress_value=progress_value)
 
 
@@ -284,9 +265,13 @@ def delete_task(task_id):
 #DELETE MULTIPLE TASKS
 @app.route("/delete_multiple", methods=["GET", "POST"])
 def delete_multiple():
-        test = request.form.get('mycheckbox')
-        #test = request.form.getlist('task._id') #getlist returns []
-        flash(test)
+        #test = request.form.get('mycheckbox')
+        list = request.form.getlist('mycheckbox') #getlist returns []
+        flash(list)
+        length_of_list = len(list)
+        for i in range(length_of_list):
+            mongo.db.tasks.delete_one({"_id": ObjectId(list[i])})
+        return redirect(url_for("get_tasks"))
 '''
     if request.method == "POST":
         test = request.form.get('mycheckbox')

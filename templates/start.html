@@ -3,12 +3,31 @@
 
     <div id="fullpage">
 
-        <div class="section">
+        <!-- <div class="section center">
             <div class="center-custom">
                 <h1 id="game-title">I🐝M</h1><br>
                 <p id="game-subtitle">A short admin game about efficient honey production</p>
                 <a href="#2"><i class="fas fa-chevron-down" id="arrow" aria-hidden="true"></i></a>
             </div>
+        </div> -->
+
+        <div class="section ">
+            <div class="row">
+                <div class="col s12 center-custom">
+                    <h1 id="game-title">I🐝M</h1><br>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col s12 center-custom">
+                    <p id="game-subtitle">A short admin game about efficient honey production</p>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col s12 center-custom">
+                    <a href="#2"><i class="fas fa-chevron-down" id="arrow" aria-hidden="true"></i></a>
+                </div>
+            </div>
+                
         </div>
         
         <div class="section center" id="2">
@@ -26,7 +45,7 @@
 
         <div class="section center" id="3">
           <div class="row">
-            <form class="col s12 m8 offset-m2" method="POST" action="{{ url_for('register') }}">
+            <form class="col s12 m8 offset-m2" method="POST" action="{{ url_for('start') }}">
                 <div class="card-panel">
                     <p>Create a username and buzzword to begin!</p>
                     <!-- user -->
@@ -68,7 +87,7 @@
 
                     <!-- button -->
                     <div class="row">
-                        <button type="submit" class="col s12 btn-large yellow waves-effect waves-orange">
+                        <button type="submit" class="col s12 btn-large yellow waves-effect waves-orange" id="enter-the-hive">
                         ENTER THE HIVE
                         </button>
                     </div>

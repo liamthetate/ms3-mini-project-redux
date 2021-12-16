@@ -17,32 +17,24 @@
         <input type="submit" value="Delete All" />
     </form>
 
-    
-        <a href="{{ url_for('delete_multiple') }}" onclick="M.toast({html: 'Reported! Good Job!', classes: 'rounded'})"
-        class="btn-small red accent-4 waves-effect waves-white">Alert?</a>
-    
-
-
     {% if tasks|length > 0 %}
-    <ul class="collection">
+    <form action="/delete_multiple" method="post">
+        <input type="submit" value="Alert all selected" class="btn-small red" onclick="M.toast({html: 'Reported! Good Job!', classes: 'rounded'})">
         {% for task in tasks %}
-        <li class="collection-item avatar">   
-
-            <div class="row">
-
-                <div class="col s1">
-                    <form action="{{ url_for('delete_multiple') }}" method="post">
-                        <p>
+        <ul class="collection">
+            <li class="collection-item avatar">
+                <div class="row">
+                    <div class="col s1">
                         <label>
+                            <div class="row">
                             <input type="checkbox" name="mycheckbox" value="{{ task._id }}"
                             onclick="M.toast({html: '{{ task.task_name }}', classes: 'rounded'})"/>
                             <span> </span>
+                            </div>
                         </label>
-                        </p>
-                    </form>
-                </div>
-            
-                <div class="col s11">
+                    </div>
+
+                    <div class="col s11">
                         <a href="{{ url_for('edit_task', task_id=task._id) }}" class="right btn-small btn-flat"><i class="fas fa-edit" id="grey"></i></a>
                         
                         <img src="/static/images/symbol2.png" width="10px">
@@ -53,11 +45,12 @@
                         <a href="{{ url_for('delete_task', task_id=task._id) }}"
                         onclick="M.toast({html: 'Bee Reported', classes: 'rounded'})"
                         class="btn-small red accent-4 waves-effect waves-white">Alert?</a>
+                    </div>
                 </div>
-            </div> 
-        </li>
+            </li>
+        </ul>
         {% endfor %}
-    </ul>
+    </form>
 
     {% else %}
         <h3 class="enter-align">No results found</h3>

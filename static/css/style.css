@@ -42,6 +42,9 @@ a {
   color: #333;
 }
 
+#enter-the-hive {
+  color: #333;
+}
 
 
 
@@ -180,10 +183,11 @@ a {
   position: absolute;
   font-size: 3rem;
   bottom: 20px;
+  margin-left:-15px;
 }
 
 #arrow2 {
-  margin-top: 40px;
+  margin-top: 15px;
   font-size: 3rem;
 }
 
@@ -192,14 +196,14 @@ a {
 }
 
 #honey-pot {
-  font-size: 9rem;
+  font-size: 8rem;
 }
 
 /* 
 https://codepen.io/seolan/pen/jbGyxq*/
 .section:nth-child(2) {
-  font-size: 1.3rem;
-  line-height: 3rem;
+  font-size: 1.2rem;
+  line-height: 2.8rem;
 }
 
 #highlight {

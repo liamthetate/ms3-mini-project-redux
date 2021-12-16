@@ -20,6 +20,19 @@
     <title>Task Manager</title>
 </head>
 <body>
+  <section>
+    <!-- flash messages -->
+    {% with messages = get_flashed_messages() %}
+        {% if messages %}
+            {% for message in messages %}
+                <ul class="flashes right">
+                    <li><a class="btn-flat"><span class="new badge red" data-badge-caption="{{ message }}"></span></a></li>
+                </ul>
+            {% endfor %}
+        {% endif %}
+    {% endwith %}
+</section>    
+
     <main class="container">
       {% block content %}
       {% endblock %}

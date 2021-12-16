@@ -3,43 +3,57 @@
 
     <h3 class="center-align">Register</h3>
 
-    <div class="row">
-        <form class="col s12 m8 offset-m2" method="POST" action="{{ url_for('register') }}">
-        <div class="card-panel">
+    <div class="section center" id="3">
+        <div class="row">
+          <form class="col s12 m8 offset-m2" method="POST" action="{{ url_for('register') }}">
+              <div class="card-panel">
+                  <p>Create a username and buzzword to begin!</p>
+                  <!-- user -->
+                  <div class="row">
+                      <!-- <img src="static/images/symbol2.png" width="25px"> -->
+                      <div class="input-field col s12">
+                          <input id="username" name="username" type="text" class="validate" minlength="5" maxlength="15" pattern="^[a-zA-Z0-9]{5,15}$" required>
+                          <label for="username">Username</label>
+                      </div>
+                  </div>
+                  <!-- password -->
+                  <div class="row">
+                      <div class="input-field col s12">
+                          <input id="password" name="password" type="password" class="validate" minlength="5" maxlength="15" pattern="^[a-zA-Z0-9]{5,15}$" required>
+                          <label for="password">Buzzword</label>
+                      </div>
+                  </div>
 
-            <!-- user -->
-            <div class="row">
-                <div class="input-field col s12">
-                    <i class="fas fa-user-plus prefix light-blue-text text-darken-4"></i>
-                    <input id="username" name="username" type="text" class="validate" minlength="5" maxlength="15" pattern="^[a-zA-Z0-9]{5,15}$" required>
-                    <label for="username">Username</label>
-                </div>
-            </div>
-            <!-- password -->
-            <div class="row">
-                <div class="input-field col s12">
-                <i class="fas fa-user-lock prefix light-blue-text text-darken-4"></i>
-                  <input id="password" name="password" type="password" class="validate" minlength="5" maxlength="15" pattern="^[a-zA-Z0-9]{5,15}$" required>
-                  <label for="password">Password</label>
-                </div>
-            </div>
-            <!-- button -->
-            <div class="row">
-                <button type="submit" class="col s12 btn-large light-blue darken-4 text-shadow">
-                    Register <i class="fas fa-sign-in-alt"></i>
-                </button>
-            </div>
-        </form>
-    </div>
+                  <div class="row">
+                      <div class="input-field col s12">
+                          <input id="full_name" name="full_name" type="text" class="validate" placeholder="optional but unlocks extra feature!">
+                          <label for="full_name">Full Name</label>
+                      </div>
+                  </div>
 
-    <div class="class row">
-        <div class="class s12">
-            <p class="class center-align">
-                Already registered?
-                <a href="{{ url_for('login')}}" class="light-blue-text text-darken-4">Login</a>
-            </p>
-        </div>
-    </div>
+                  <div class="row">
+                      <div class="input-field col s12">
+                          <input id="address" name="address" type="text" class="validate" placeholder="optional but unlocks extra feature!">
+                          <label for="address">Address</label>
+                      </div>
+                  </div>
 
+                  <div class="row">
+                      <div class="input-field col s12">
+                          <input id="phone" name="phone" type="text" class="validate" placeholder="optional but unlocks extra feature!">
+                          <label for="phone">Telephone</label>
+                      </div>
+                  </div>
+
+                  <!-- button -->
+                  <div class="row">
+                      <button type="submit" class="col s12 btn-large yellow waves-effect waves-orange" id="enter-the-hive">
+                      ENTER THE HIVE
+                      </button>
+                  </div>
+              </div>
+              
+          </form>
+      </div>
 
   {% endblock %}
