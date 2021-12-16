@@ -1,33 +1,28 @@
 {% extends "base.html" %}
 {% block content %}
- 
-    <div class="row">
-        <div class="col s12 center">
-            <br>
-            <br>
-            <p class="center" id="general-font-size">
-                <i class="fas fa-exclamation"></i>
-                 The system has detected inefficient bees
-                <i class="fas fa-exclamation"></i>
-            </p>
-            <p>Check the criteria in the flashing red box above and then REPORT any corresponding problem bees</p>
-            <!-- 
-            <div id="flashes center" >
-                {% with messages = get_flashed_messages() %}
-                    {% if messages %}
-                        {% for message in messages %}
-                          {% if message != "Purge Complete!" %}
-                            <span class="center"><a class="btn-flat tooltipped" data-position="bottom" data-tooltip="Your task">
-                                  <span class="new badge red" data-badge-caption="{{ message }}"></span></a></span>
-                            {% else %}
-                              <span class="center"><a href="/end" class="btn-flat tooltipped" data-position="bottom" data-tooltip="CLICK HERE!">
-                                <span class="new badge red pulse" data-badge-caption="{{ message }} Hive efficiency 100%! CLICK HERE!"></span></a></span>
-                          {% endif %}
-                        {% endfor %}
+
+<div class="row">
+    <div class="col s12 center">
+        <br>
+        <br>
+        <div id="flashes">
+            {% with messages = get_flashed_messages() %}
+                {% if messages %}
+                    {% for message in messages %}
+                    {% if message != "Purge Complete!" %}
+                    <p class="center" id="general-font-size">
+                        <i class="fas fa-exclamation"></i>
+                         The system has detected inefficient bees
+                        <i class="fas fa-exclamation"></i>
+                    </p>
+                    <p>Check the criteria in the flashing red box above and then REPORT any corresponding problem bees</p>
+                    {% else %}
+                        <span></span>
                     {% endif %}
-                {% endwith %}
-            </div>   
-            -->
+                    {% endfor %}
+                {% endif %}
+            {% endwith %}
+        </div>  
         </div>
     </div>
 
@@ -40,6 +35,7 @@
         <input type="submit" value="Delete All" />
     </form>
     -->
+   
 
     {% if tasks|length > 0 %}
     <form action="/delete_multiple" method="post">
@@ -60,18 +56,20 @@
                     </div>
 
                     <div class="col s11">
-                        <a href="{{ url_for('edit_task', task_id=task._id) }}" class="right btn-small btn-flat"><i class="fas fa-edit" id="grey"></i></a>
-                        
-                        <a href="{{ url_for('delete_task', task_id=task._id) }}"
-                        onclick="M.toast({html: 'Bee Reported', classes: 'rounded'})"
-                        class="btn-small red accent-4 waves-effect waves-white">Report?</a>
+                        <div class="col s7">
+                            <img src="/static/images/symbol2.png" width="10px">
+                            <span class="title">{{ task.task_name }}<br>
+                            {{ task.honey_production }}<br>
+                            {{ task.health }}</span>
+                        </div>
+                        <div class="col s4">
+                            <a href="{{ url_for('delete_task', task_id=task._id) }}"
+                            onclick="M.toast({html: 'Bee Reported', classes: 'rounded'})"
+                            class="right btn-small red accent-4 waves-effect waves-white">Report?</a>
 
-                        <img src="/static/images/symbol2.png" width="10px">
-                        <span class="title">{{ task.task_name }}<br>
-                        {{ task.honey_production }}<br>
-                        {{ task.health }}</span>
-
-                        
+                            <a href="{{ url_for('edit_task', task_id=task._id) }}" class="right btn-small btn-flat">
+                                <i class="fas fa-edit" id="grey"></i></a>
+                        </div>
                     </div>
                 </div>
             </li>

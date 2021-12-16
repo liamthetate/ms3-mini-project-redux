@@ -281,27 +281,24 @@ def delete_multiple():
         return redirect(url_for("get_tasks"))
 
 
-#END / deletes game database
-@app.route("/end", methods=["GET", "POST"])
+#END / DESTROY ALL DATA (despite what's written on the page lol)
+@app.route("/end")
 def end():
     mongo.db.tasks.delete_many({}) #deletes GAME database
-    username = mongo.db.users.find_one(
-        {"username": session["user"]})["username"]
-    all_data = mongo.db.users.find_one({})
 
-    if request.method == "POST":
-        mongo.db.users.delete_one(  #destroys all USER data
-            {"username": session["user"]}) 
-        session.pop("user") # remove user from session cookie
+    mongo.db.users.delete_one(  #deletes all USER data
+        {"username": session["user"]}) 
+    
+    session.pop("user") # deletes user from session cookie
 
-    return render_template("end.html", username=username, all_data=all_data)
+    return render_template("end.html")
 
-
-#LOGOUT / DESTROY ALL DATA
+'''
+#LOGOUT A
 @app.route("/logout")
 def logout():
     return render_template("logged_out.html")
-
+'''
 
 if __name__ == "__main__":
     app.run(host=os.environ.get("IP"),
