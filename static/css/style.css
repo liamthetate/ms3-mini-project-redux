@@ -1,14 +1,10 @@
 
-/* Styling the border and box
-effect of the progress bar*/
 .progress-bar {
   width: 100%;
   height: 10px;
   margin-top: 10px;
 }
 
-/* Stylingthe background color of each
-animation and border radius */
 .percentage {
   display: block;
   height: 100%;
@@ -17,8 +13,11 @@ animation and border radius */
 }
 
  
- 
- 
+#your-data {
+  font-size: 1rem;
+}
+
+
  
  
  
@@ -95,17 +94,19 @@ nav li {
 
 #logo-location {
   color: #333;
-  left: 10%;
+  left: 5%;
 }
 
 #plus-location {
-  position: relative;
-  left: 20%;
+  position: fixed;
+  left: 120px;
+  top: 5px;
 }
 
 #search-location {
-  position: relative;
-  left: 20%;
+  position: fixed;
+  left: 170px;
+  top: 5px;
 }
 
 
@@ -221,8 +222,9 @@ https://codepen.io/seolan/pen/jbGyxq*/
 }
 
 #congrats {
-  font-size: 8rem;
+  font-size: 8em;
   margin-top: 200px;
+  max-width: 100%;
 
 }
 
@@ -289,3 +291,4 @@ https://codepen.io/seolan/pen/jbGyxq*/
 #final-comp {
   margin-top: 20px;
 }
+

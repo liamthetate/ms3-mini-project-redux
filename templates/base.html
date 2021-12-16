@@ -22,8 +22,6 @@
             width: {{ progress_value }}%;
           }
           
-          /* Animating the progress bar by
-          initially starting from 0*/
           @keyframes progress {
             from {width: 0%;}
             to {width: {{ progress_value }}%;}
@@ -41,17 +39,18 @@
             <div class="nav-wrapper">
               <ul>
                 <li id="logo-location">
-                  <a href="{{ url_for('get_tasks') }}" class="brand-logo left tooltipped" data-position="bottom" data-tooltip="Database"
-                  id="logo-color">I🐝M</a></li>
+                  <a href="{{ url_for('get_tasks') }}" class="brand-logo left tooltipped"
+                  data-position="bottom" data-tooltip="Database" id="logo-color">I🐝M</a></li>
 
-                <li id="plus-location"><a href="{{ url_for('add_task') }}" class="tooltipped" data-position="bottom" data-tooltip="Add Entry">
-                  <i class="fas fa-plus" id="plus-color"></i></a></li>
+                <li id="plus-location">
+                  <a href="{{ url_for('add_task') }}" class="tooltipped" data-position="bottom"
+                  data-tooltip="Add Entry"><i class="fas fa-plus" id="plus-color"></i></a></li>
 
                 <li id="search-location">
                   <form action="{{ url_for('search') }}" method="post"> 
-                    <div class="input-field left tooltipped" data-position="bottom" data-tooltip="Search">
+                    <div class="input-field left">
                       <input id="search" type="search" name="search" required>
-                      <label class="label-icon" for="search"><i class="fas fa-search" id="search-color"></i></label>
+                      <label class="label-icon tooltipped" data-position="bottom" data-tooltip="Search" for="search"><i class="fas fa-search" id="search-color"></i></label>
                       <i class="material-icons">close</i>
                     </div>
                   </form>
@@ -72,8 +71,8 @@
                           </ul>
                           {% else %}
                           <ul class="flashes right">
-                            <li><a href="/end" class="btn-flat tooltipped" data-position="bottom" data-tooltip="{{ message }}">
-                              <span class="new badge red pulse" data-badge-caption="{{ message }} CLICK HERE!"></span></a></li>
+                            <li><a href="/end" class="btn-flat tooltipped" data-position="bottom" data-tooltip="CLICK HERE!">
+                              <span class="new badge red pulse" data-badge-caption="{{ message }} Hive efficiency 100%! CLICK HERE!"></span></a></li>
                         </ul>
                         {% endif %}
                       {% endfor %}
@@ -84,7 +83,7 @@
 
         <div class="progress-bar-container">
           <div class="progress-bar">
-              <span class="percentage task-progress"></span>
+              <span class="percentage task-progress tooltipped" data-position="right" data-tooltip="Progress"></span>
           </div>
         </div>
 

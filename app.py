@@ -280,21 +280,28 @@ def end_state():
 '''
 
 #END / deletes game database
-@app.route("/end", methods=["GET", "POST"])
+@app.route("/end")
 def end():
     mongo.db.tasks.delete_many({}) #deletes GAME database
     username = mongo.db.users.find_one(
         {"username": session["user"]})["username"]
-    #if session["user"]:
-    #    return render_template("end.html", username=username)
-    return render_template("end.html", username=username)
+    all_data = mongo.db.users.find_one({})
+    '''  
+    full_name = mongo.db.users.find_one(
+        {"full_name": session["user"]})["full_name"]
+    address = mongo.db.users.find_one(
+        {"address": session["user"]})["address"]
+    phone = mongo.db.users.find_one(
+        {"phone": session["user"]})["phone"]
+    '''
+    return render_template("end.html", username=username, all_data=all_data)
 
 
 #LOGOUT / DESTROY ALL DATA
 @app.route("/logout")
 def logout():
-    mongo.db.users.delete_one(
-        {"username": session["user"]}) #destroys all USER data
+    mongo.db.users.delete_one(  #destroys all USER data
+        {"username": session["user"]}) 
     session.pop("user") # remove user from session cookie
     return render_template("logged_out.html")
 
