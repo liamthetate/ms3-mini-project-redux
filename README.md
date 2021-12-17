@@ -2,6 +2,8 @@
 
 Live site: http://flask-task-manager-experiment.herokuapp.com/start
 
+Works best on Desktop & Tablet (or horizontal mobile).
+
 <br/>
 <br/>
 
@@ -237,56 +239,47 @@ Device | OS | Browser
 -------|----|---------
 iPhone 8 | iOS 14 | Safari, Ghostery, Firefox 
 Macbook Pro | Big Sur | Safari, Firefox, Chrome, Brave
+iPad | iOS 14 | Safari, Firefox 
 <br/>
-
-iPhone 8 couldn't fit the whole game on the screen and was missing vital controls. But it's a desktop experience so...
-
-The fixed width nature of the game means that testing in browsers has been relatively straight forward, the main issue for desktop was keeping the game centered on the page. This was achieved with this css magic formula:
-
-    display: flex;
-    justify-content: center;
-    align-items: center;
-
-KaboomJS has worked flawlessly across all the browsers I tested it on however the AudioContent issue addressed in 'Known Bugs' remains a problem to solve.
-
+<br/>
 
 ## Validator testing
 
-HTML: A few errors detected on the W3C validator but I'm outta time! :/
+HTML: A few errors detected on the [W3C validator](https://validator.w3.org/) but in reference to Jinja, tripping it up.
 
-CSS: No errors were found when passing through the Jigsaw W3C validator.
+CSS: No errors were found when passing through the [Jigsaw W3C validator](https://jigsaw.w3.org/css-validator).
 
-JS: KaboomJS trips 'Jshint' up on almost every line so difficult to know :/
+PYTHON: Code works with no syntax errors detected BUT a large list of pep8 recommendations came from [Pep8 online](http://pep8online.com). Sadly I haven't given myself enough time to correct all the code for the deadline... :/
 <br/>
 <br/>
 
 ## Lighthouse results
 
-Desktop [View](src/images/lighthouse.png)
+Desktop: <br>
+Whilst the 'start' page generally [scored well](static/images/rm-lh1.png), the main page (get_tasks) only scored well in [performance](static/images/rm-lh2.png), with the [score of 58 for Accessibility](static/images/rm-lh3.png) indicative of the further work and time needed to make this app/site up to professional standards.
 <br/>
 <br/>
 
 ## Known bugs
 
-1. Safari is a big one. Because of the AudioContent API, no sound will play at all! Chrome won't play the title music for the same reason but does work after that.
+1. This isn't great on vertical mobile screens:
+* The start page nav arrows overlaps with other pages. It doesn't look pretty.
+* The list items are squashed up and overlap.
+* The notification UI overlaps the search function.
+
+2. The 'end' page canvas seems to be overly large!
+
+3. Once you've finished the game the program wipes your username, but only if you get to the end page. If you quit half way through then come back, you can't login. It tells you that the username already exists and you have to create a new username and password to get in. Given that the game is so short, is it a bug or a feature?
+
+4. Not a bug but.... There is no modal 'confirm delete' on the main page, I like the idea that this process is flippant and 'efficient' however there is a confirmation box if you decide to edit an entry. It adds to the more time consuming nature of doing the right thing.
+
+
+
 <br/>
 <br/>
 
 # DEPLOYMENT
 
-To get this code to work on your machine I used this dev template:
-
-* [Phaser 3 Template](https://github.com/ourcade/phaser3-parcel-template.git)
-
-Then in Visual Studio Code, open a zsh terminal and type:
-
-    npm install kaboom
-
-    npm run start // RUN YOUR OWN SERVER
-
-    npm run build // TO MAKE A VERSION FOR THE WEB (Production files will be placed in the dist folder. Then upload those files to a web server.)
-
-I have deployed the game to my own ftp/website [here](http://liamtate.co.uk/efws/index.html) using Filezilla to transfer files. I am happy to supply a username & password so you can check the time and date stamp. (I'm hesitant to deploy it to github pages because I'd have to restructure my development folders then push to this repository and I'm concerned it'll break something this close to the deadline. All the deployed files can be found in the /dist folder).
 
 However, if I was going to deploy to GitHub pages this is how I would do it:
 
@@ -324,16 +317,11 @@ To clone a repository to GitHub Desktop:
 
 ## Code: 
 
-The 'game' owes an obvious debt to the Task Manager mini-project and further code used is detailed below.
+The 'game' owes an obvious debt to the Task Manager mini-project.
 
-<br />
+Materlize website in general
+Clearing flask message 
+Progress Bar
 
-
-
-# SPOILERS
-
-If you Edit > Select All on the webpage you'll find a message.
-On the webpage Right-click > 'Inspect / Inspect Element' > Console. You will find a further message.
-Got it yet? Hit the + and - keys for fun times!
-
-The idea, at least for me, is to free the workers by breaking or crashing the actual game by overwhelming the machine(s) #Luddite :D
+<br>
+<br>
