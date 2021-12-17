@@ -293,7 +293,7 @@ Heroku:
 * Enter 'I.P' and '0.0.0.0' 
 * Enter 'Port' and '5000'
 * Enter 'SECRET_KEY' and (value from env.py)
-* Enter 'MONGO_URI' and ''
+* Enter 'MONGO_URI' and (value from MongoDB > Databases > Connect > Connect your applications ("mongodb+srv://" etc) )
 * Enter 'MONGO_DBNAME' and 'name-with-dashes'
 * (Using your CLI add proc and requirements.txt to your github)
 * Under Heroku's Deploy tab > enable Automatic Deployment > then click Deploy Branch (to main).
