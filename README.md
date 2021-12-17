@@ -127,38 +127,49 @@ Wireframes
 
 ![landing page](static/images/rm-landing-page.png)
 <br/>
-A visual pun. Simple and straightfoward design with a genocidial cleanliness.
+A visual gag. A simple and straightfoward website design with a genocidal cleanliness.
 
 ## Top HUD
 
-![top hud](src/images/top-hud.png)
+![top hud](static/images/rm-top-hud.png)
 <br/>
-The 1600 is a reference to real targets that 'cleaners' have for iPhones. 
-A better display would have been Hour / Minutes / Seconds but I couldn't figure it out!
+The top nav bar contains the logo, an 'add' bee function, a search function and a notification of the number of problem bees.
 
-## Player HUD
+## Hover
 
-![player hud](src/images/player-hud.png)
+![hover](static/images/rm-hover.png)
 <br/>
-Oversized and overbearing, permenatly displayed above your head, a signifier of your value lol.
+Each item brings up a descriptive box on mouser hover.
 
-## Spray
+## Progress Bar
 
-![player hud](src/images/spray.png)
+![progress](static/images/rm-progress.png)
 <br/>
-A toxic chemical that makes the phones nice and shiny.
+A subtle progress bar updates with each completed task. 
 
-## Fail!
+## Instructions!
 
-![player hud](src/images/fail.png)
+![instructions](static/images/rm-instructions.png)
 <br/>
-If you don't do your one job properly, the machine will shake!
+Just to make it clear what the user has to do.
 
-## Chat!
+## Notifications!
 
-![player hud](src/images/worker-chat.png)
+![notifications](static/images/rm-notifications.png)
 <br/>
-The only thing worth doing XD
+A red box detailing the current task
+
+## Report?
+
+![list item](static/images/rm-list-item.png)
+<br/>
+Each bee can either be indidivually reported on or edited or selected
+
+## Select?
+
+![select](static/images/rm-select.png)
+<br/>
+Each bee can either be selected and then batch 'reported'.
 <br/>
 <br/>
 
@@ -317,11 +328,24 @@ To clone a repository to GitHub Desktop:
 
 ## Code: 
 
-The 'game' owes an obvious debt to the Task Manager mini-project.
+GENERAL:
 
-Materlize website in general
-Clearing flask message 
-Progress Bar
+The 'game' owes an obvious debt to the Task Manager mini-project and certain labels remain (i.e. get_tasks or task_name for the bees name etc).
+
+The Materlize website in general was used for buttons, navbar, modals etc.
+
+The select multiple / check box code is my own, but I figured it out after watching [this video](https://youtu.be/DOrJ0tvz0Ow?t=299) about how to do it with SQL.
+
+
+SPECIFIC:
+
+Clearing flask messages - I was getting bugs on the main menu displaying too many messages, [this](https://stackoverflow.com/questions/63387031/how-to-clear-existing-flash-messages-in-flask) fixed it.
+
+
+Progress Bar - It took a few different resources to figure out how to make one and whilst I modified it to fit, the code is not mine. 
+[1](https://www.w3schools.com/cssref/css3_pr_animation-keyframes.asp) [2](https://www.geeksforgeeks.org/how-to-create-a-progress-bar-animation-using-html-and-css/) [3](https://stackoverflow.com/questions/51383352/change-css-with-python-and-flask)
+
+
 
 <br>
 <br>
