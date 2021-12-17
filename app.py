@@ -184,7 +184,7 @@ def progress_bar():
 #MAIN GAME SCREEN
 @app.route("/get_tasks")
 def get_tasks():
-    session.pop('_flashes', None)
+    session.pop('_flashes', None) # <-- Not my code
     progress_value = progress_bar()
     ui_tasks()
     tasks = list(mongo.db.tasks.find())

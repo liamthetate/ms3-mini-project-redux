@@ -285,8 +285,15 @@ Whilst the 'start' page generally [scored well](static/images/rm-lh1.png), the m
 
 # DEPLOYMENT
 
+Linking up GitHub repository with Heroku and auto thingy.
 
-However, if I was going to deploy to GitHub pages this is how I would do it:
+
+
+
+
+
+
+GitHub pages:
 
 * GitHub repository > 'Settings' tab > 'Pages' menu
 * Source drop-down menu > Select Master Branch > Click Save
@@ -335,11 +342,10 @@ SPECIFIC:
 
 Fullpage.css is obviously not mine and style.css contains comments where I've used others code.
 
-Clearing flask messages - I was getting bugs on the main menu displaying too many messages, [this](https://stackoverflow.com/questions/63387031/how-to-clear-existing-flash-messages-in-flask) fixed it.
-
-
-CSS Progress Bar - It took a few different resources to figure out how to make one and whilst I modified it to fit, the CSS code is not mine. The Python is.
+CSS Progress Bar (Line 1-16 style.css) - It took a few different resources to figure out how to make one and whilst I modified it to fit, the CSS code is not mine. The Python is.
 [1](https://www.w3schools.com/cssref/css3_pr_animation-keyframes.asp) [2](https://www.geeksforgeeks.org/how-to-create-a-progress-bar-animation-using-html-and-css/) [3](https://stackoverflow.com/questions/51383352/change-css-with-python-and-flask)
+
+Clearing flask messages (Line 187 app.py) - I was getting bugs on the main menu displaying too many messages, [this](https://stackoverflow.com/questions/63387031/how-to-clear-existing-flash-messages-in-flask) fixed it.
 
 
 
