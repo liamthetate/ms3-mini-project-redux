@@ -1,45 +1,41 @@
-{% extends "base.html" %}
-{% block content %}
+{% extends "base.html" %} {% block content %}
 
-    <h3 class="center-align">Just one more form!</h3>
-    <p class="center-align" id="general-font-size">The database is almost complete, just add this last entry!</p>
-    <div class="row card-panel grey lighten-5">
+<h3 class="center-align">Just one more form!</h3>
+<p class="center-align" id="general-font-size">The database is almost complete, just add this last entry!</p>
+<div class="row card-panel grey lighten-5">
+    <div class="col m6">
+        <img src="/static/images/welcome_bee_small.png" id="bee-pic" />
+    </div>
 
-        <div class="col m6">
-          <img src="/static/images/welcome_bee_small.png" id="bee-pic">
+    <form class="col m6" method="POST" action="{{ url_for('add_task') }}">
+        <!-- triggers python add_task -->
+
+        <div class="row">
+            <div class="input-field col s12">
+                <img src="/static/images/symbol2.png" id="bee-name-symbol" class="prefix" />
+                <input id="task_name" name="task_name" minlength="2" maxlength="50" type="text" class="validate" required />
+                <label for="task_name">Bee Name</label>
+            </div>
+        </div>
+        <div class="input-field col s12">
+            <textarea id="honey_production" name="honey_production" minlength="2" maxlength="50" class="materialize-textarea validate" required></textarea>
+            <label for="honey_production">Honey Productivity</label>
         </div>
 
-        <form class="col m6" method="POST" action="{{ url_for('add_task') }}"> <!-- triggers python add_task -->
+        <div class="input-field col s12">
+            <textarea id="health" name="health" minlength="2" maxlength="50" class="materialize-textarea validate" required></textarea>
+            <label for="health">Health</label>
+        </div>
 
-          <div class="row">
-            <div class="input-field col s12">
-              <img src="/static/images/symbol2.png" id="bee-name-symbol" class="prefix">
-              <input id="task_name" name="task_name" minlength="2" maxlength="50"
-              type="text" class="validate" required>
-              <label for="task_name">Bee Name</label>
+        <div class="row">
+            <div class="col s12 center-align">
+                <button class="submit btn-large yellow" id="plus-color">
+                    <!-- submit triggers python -->
+                    Add Bee <i class="fas fa-plus"></i>
+                </button>
             </div>
-          </div>
-            <div class="input-field col s12">
-              <textarea id="honey_production" name="honey_production" minlength="2"
-                maxlength="50" class="materialize-textarea validate" required></textarea>
-              <label for="honey_production">Honey Productivity</label>
-            </div>
-
-            <div class="input-field col s12">
-              <textarea id="health" name="health" minlength="2"
-                maxlength="50" class="materialize-textarea validate" required></textarea>
-              <label for="health">Health</label>
-            </div>
-          
-            <div class="row">
-                <div class="col s12 center-align">
-                    <button class="submit btn-large yellow" id="plus-color"> <!-- submit triggers python -->
-                        Add Bee <i class="fas fa-plus"></i>
-                    </button>
-                </div>
-            </div>
-
-        </form>
-      </div>
+        </div>
+    </form>
+</div>
 
 {% endblock %}

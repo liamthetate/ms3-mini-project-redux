@@ -1,6 +1,5 @@
 import os
 import random #for game data
-import time
 
 from flask import (
     Flask, flash, render_template, #flash is the prompts for the user

@@ -2,9 +2,12 @@
 
 Live site: http://flask-task-manager-experiment.herokuapp.com/start
 
+<br/>
+<br/>
+
 # ABOUT
 
-A somewhat gamified CRUD experience. I would recommend 'playing' it first before reading any further, as the information contained in this document might neturalise the experience...
+A (somewhat) gamified CRUD experience. I would recommend 'playing' it before reading any further, as the information contained in this document might deflect from the first-time experience...
 
 <br/>
 <br/>
@@ -20,7 +23,7 @@ A somewhat gamified CRUD experience. I would recommend 'playing' it first before
 
 First Time Visitor Goals
 
->I want to play a game!
+>I want to play a game.
 
 >I want to understand what my task is.
 
@@ -32,7 +35,7 @@ Returning Visitor Goals
 
 >I want to show a friend this dull but disturbing thing I found.
 
->I want to see what happens when I save the bees.
+>I want to see what happens when I 'save' the bees.
 
 >I want a quick way to get in contact with the creator.
 
@@ -41,14 +44,15 @@ Returning Visitor Goals
 
 Frequent User Goals
 
-> I enjoy lists.
+> I enjoy creating ficitional bees and adding them to lists.
+
 <br/>
 <br/>
 
 ## Design
 
 Colour Scheme
-* Yellow and Black (obviously), with red used to call attention to important information.
+* White predominates (Apple/Tech vibes) with Yellow and Black used on buttons and the main menu. As ever Red is used to call attention to important information.
 <br/>
 
 Typography
@@ -57,7 +61,7 @@ Typography
 
 Wireframes
 * [Title Screen](static/images/rm-wf1.png)
-* [Objective](static/images/rm-wf2.png)
+* [Story](static/images/rm-wf2.png)
 * [Signup](static/images/rm-wf3.png)
 * [Create](static/images/rm-wf4.png)
 * [Read](static/images/rm-wf5a.png)
@@ -71,35 +75,47 @@ Wireframes
 
 # LIBRARIES, FRAMEWORKS & PROGRAMS USED
 
-1. Bootstrap 4.5:
-    * Bootstrap was used throughout for layout, buttons etc.
-    
+1. Materialize:
+    * Materialize was used throughout for layout, buttons etc.
+  <br/>
 2. Google Fonts:
-    * Google fonts was used for 'Changa'.
-    
+    * Google fonts was used for 'IBM Plex Serif'.
+    <br/>
 3. Font Awesome:
     * Font Awesome was for the top icon and the social media link.
-    
-4. Visual Studio Code
-    * VSC was used for all code creation and pushing to GitHub.
-    
+    <br/>
+4. Gitpod
+    * Gitpod was used for all code creation and pushing to GitHub.
+    <br/>
 5. GitHub:
     * GitHub was used to store the projects code after being pushed from Gitpod.
-    
+    <br/>
 6. Photoshop:
-    * Photoshop was used to edit exisitng assets and create new ones.
-    
+    * Photoshop was used to create a fake 'handwritten' picture of a bee's data.
+    <br/>
 7. Balsamiq:
     * Balsamiq was used to create the wireframes during the design process.
-
-8. KaboomJS:
-    * The javascript library KaboomJS was essential for all the game code.
-    
-8. [Web Formater](https://webformatter.com/):
+<br/>
+8. Full Page JS:
+    * The javascript library Full Page JS was used for the start and end pages.
+    <br/>
+9. [Web Formater](https://webformatter.com/):
     * To format my html, css code and Javascript.
-
-9. Dev template:
-    * [Phaser 3 Template](https://github.com/ourcade/phaser3-parcel-template.git) for VSC for development. 
+<br/>
+10. Heroku:
+    * For hosting the app/site, synced to GitHub.
+<br/>
+11. MongoDB:
+    * For database hosting and backend CRUD functionalitity.
+<br/>
+12. Jinja:
+    * Template engine 
+<br/>
+13. Flask:
+    * Framework used to write the web application.
+<br/>
+14. Python:
+    * For all the game logic and CRUD operations.
 <br/>
 <br/>
 
@@ -107,9 +123,9 @@ Wireframes
 
 ## Landing page
 
-![landing page](src/images/landing-page.png)
+![landing page](static/images/rm-landing-page.png)
 <br/>
-Simple and straightfoward. Not cluttered and just focused on the game experience.
+A visual pun. Simple and straightfoward design with a genocidial cleanliness.
 
 ## Top HUD
 
@@ -148,47 +164,49 @@ The only thing worth doing XD
 
 ## First Time Visitor Goals:
 
->I want to play a silly game!
+>I want to play a game.
 
-Well it's silly but whether it's fun...
-
-<br/>
-
->I want to understand the controls.
-
-For those that don't like to figure things out, there is a button!
+Well, it's not going to be fun.
 
 <br/>
 
->I want to navigate the site, effortlessly.
+>I want to understand what my task is.
 
-You're in luck! It's so basic and straight forward!
+The opening story, menu instructions and flashing red icons should communicate what needs doing.
+
+<br/>
+
+>I want to navigate the app/site, effortlessly.
+
+As a one-shot experience there is a flow to the UX and simple UI
 
 <br/>
 
 ## Returning Visitor Goals:
 
->I want to show a friend this dumb game!
+>I want to show a friend this dull but disturbing thing I found.
 
-It's still dumb!
+Your exisiting username probably doesn't exist anymore!
+
+<br/>
+
+>I want to see what happens when I 'save' the bees.
+
+Nothing new on-screen, but you're a good person. 
 
 <br/>
 
 >I want a quick way to get in contact with the creator.
 
-The social media link is right there!
-
->I want to see what happens when I work the full 12 hour shift.
-
-It's really disappointing and a waste of time. Meta.
+It's right at the bottom of the start page.
 
 <br/>
 
 ## Frequent User Goals:
 
->I have a serious procrastination problem.
+> I enjoy creating ficitional bees and adding them to lists.
 
-Maybe time is to be wasted?
+I like your style.
 <br/>
 <br/>
 
@@ -198,19 +216,12 @@ There are numerous ways to improve this experience, from small to large.
 
 SMALL: 
 
-* A Hour/Minutes/Seconds countdown for the shift timer.
-
-* Full touch-device compatibility.
-
-* 'Controls?' button is toggle that expands & contracts.
-
-* Less music? The game takes a while to load due to the quantity of tracks.
+* Only display list information that pertains to the current task i.e. if the UI says find the diseased, the list below only lists disease and not honey productivity. At the moment it's more intuitive to 'skip ahead' and start reporting bees that aren't yet a focus of attention.
 
 LARGE:
 
-* Animations! Animated characters and actions would lift the experience.
+* More involved tasks! For example: Finding the Admin or Head of BR (Bee Resources) log-in details on the list, then logging-in as them and reporting them as diseased / poor productivity, lol!
 
-* Tiolet break! As in the wireframes, the ability to go to the tiolet and cry would make this extra joyful.
 <br/>
 <br/>
 

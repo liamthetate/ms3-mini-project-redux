@@ -1,32 +1,25 @@
-{% extends "base.html" %}
-{% block content %}
+{% extends "base.html" %} {% block content %}
 
 <div class="row">
     <div class="col s12 center">
-        <br>
-        <br>
+        <br />
+        <br />
         <div id="flashes">
-            {% with messages = get_flashed_messages() %}
-                {% if messages %}
-                    {% for message in messages %}
-                    {% if message != "Purge Complete!" %}
-                    <p class="center" id="general-font-size">
-                        <i class="fas fa-exclamation"></i>
-                         The system has detected inefficient bees
-                        <i class="fas fa-exclamation"></i>
-                    </p>
-                    <p>Check the criteria in the flashing red box above and then REPORT any corresponding problem bees</p>
-                    {% else %}
-                        <span></span>
-                    {% endif %}
-                    {% endfor %}
-                {% endif %}
-            {% endwith %}
-        </div>  
+            {% with messages = get_flashed_messages() %} {% if messages %} {% for message in messages %} {% if message != "Purge Complete!" %}
+            <p class="center" id="general-font-size">
+                <i class="fas fa-exclamation"></i>
+                The system has detected inefficient bees
+                <i class="fas fa-exclamation"></i>
+            </p>
+            <p>Check the criteria in the flashing red box above and then REPORT any corresponding problem bees</p>
+            {% else %}
+            <span></span>
+            {% endif %} {% endfor %} {% endif %} {% endwith %}
         </div>
     </div>
+</div>
 
-    <!-- 
+<!-- 
     <form action="/fill-db-button">
         <input type="submit" value="Fill DataBase" />
     </form>
@@ -35,55 +28,45 @@
         <input type="submit" value="Delete All" />
     </form>
     -->
-   
 
-    {% if tasks|length > 0 %}
-    <form action="/delete_multiple" method="post">
-        <input type="submit" value="REPORT all selected" class="btn-small red"
-        onclick="M.toast({html: 'Reported! Good Job!', classes: 'rounded'})">
-        {% for task in tasks %}
-        <ul class="collection">
-            <li class="collection-item avatar">
-                <div class="row">
-                    <div class="col s1">
-                        <label>
-                            <div class="row">
-                            <input type="checkbox" name="mycheckbox" value="{{ task._id }}"
-                            onclick="M.toast({html: '{{ task.task_name }}', classes: 'rounded'})"/>
+{% if tasks|length > 0 %}
+<form action="/delete_multiple" method="post">
+    <input type="submit" value="REPORT all selected" class="btn-small red" onclick="M.toast({html: 'Reported! Good Job!', classes: 'rounded'})" />
+    {% for task in tasks %}
+    <ul class="collection">
+        <li class="collection-item avatar">
+            <div class="row">
+                <div class="col s1">
+                    <label>
+                        <div class="row">
+                            <input type="checkbox" name="mycheckbox" value="{{ task._id }}" onclick="M.toast({html: '{{ task.task_name }}', classes: 'rounded'})" />
                             <span> </span>
-                            </div>
-                        </label>
+                        </div>
+                    </label>
+                </div>
+
+                <div class="col s11">
+                    <div class="col s7">
+                        <img src="/static/images/symbol2.png" width="10px" />
+                        <span class="title">
+                            {{ task.task_name }}<br />
+                            {{ task.honey_production }}<br />
+                            {{ task.health }}
+                        </span>
                     </div>
+                    <div class="col s4">
+                        <a href="{{ url_for('delete_task', task_id=task._id) }}" onclick="M.toast({html: 'Bee Reported', classes: 'rounded'})" class="right btn-small red accent-4 waves-effect waves-white">Report?</a>
 
-                    <div class="col s11">
-                        <div class="col s7">
-                            <img src="/static/images/symbol2.png" width="10px">
-                            <span class="title">{{ task.task_name }}<br>
-                            {{ task.honey_production }}<br>
-                            {{ task.health }}</span>
-                        </div>
-                        <div class="col s4">
-                            <a href="{{ url_for('delete_task', task_id=task._id) }}"
-                            onclick="M.toast({html: 'Bee Reported', classes: 'rounded'})"
-                            class="right btn-small red accent-4 waves-effect waves-white">Report?</a>
-
-                            <a href="{{ url_for('edit_task', task_id=task._id) }}" class="right btn-small btn-flat">
-                                <i class="fas fa-edit" id="grey"></i></a>
-                        </div>
+                        <a href="{{ url_for('edit_task', task_id=task._id) }}" class="right btn-small btn-flat"> <i class="fas fa-edit" id="grey"></i></a>
                     </div>
                 </div>
-            </li>
-        </ul>
-        {% endfor %}
-        <input type="submit" value="REPORT all selected" class="btn-small red"
-        onclick="M.toast({html: 'Reported! Good Job!', classes: 'rounded'})">
-    </form>
+            </div>
+        </li>
+    </ul>
+    {% endfor %}
+    <input type="submit" value="REPORT all selected" class="btn-small red" onclick="M.toast({html: 'Reported! Good Job!', classes: 'rounded'})" />
+</form>
 
-    {% else %}
-        <h3 class="enter-align">No results found</h3>
-    {% endif %}
-
-    
-
-
-{% endblock %}
+{% else %}
+<h3 class="enter-align">No results found</h3>
+{% endif %} {% endblock %}

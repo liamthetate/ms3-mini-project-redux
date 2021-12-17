@@ -1,108 +1,93 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Serif:wght@700&display=swap" rel="stylesheet"> 
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.1/css/all.min.css"
-        integrity="sha512-xA6Hp6oezhjd6LiLZynuukm80f8BoZ3OpcEYaqKoCV3HKQDrYjDE1Gu8ocxgxoXmwmSzM4iqPvCsOkQNiu41GA==" crossorigin="anonymous" type="text/css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css" type="text/css">
-    
-    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <head>
+        <meta charset="UTF-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+        <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Serif:wght@700&display=swap" rel="stylesheet" />
+        <link
+            rel="stylesheet"
+            href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.1/css/all.min.css"
+            integrity="sha512-xA6Hp6oezhjd6LiLZynuukm80f8BoZ3OpcEYaqKoCV3HKQDrYjDE1Gu8ocxgxoXmwmSzM4iqPvCsOkQNiu41GA=="
+            crossorigin="anonymous"
+            type="text/css"
+        />
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css" type="text/css" />
 
-    <link rel="stylesheet" href="{{ url_for('static', filename='css/fullpage.css') }}" type="text/css" />
-    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}" type="text/css">
-    
-    {% block styles %}
+        <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" />
+
+        <link rel="stylesheet" href="{{ url_for('static', filename='css/fullpage.css') }}" type="text/css" />
+        <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}" type="text/css" />
+
+        {% block styles %}
         <style>
-            .task-progress {
-            width: {{ progress_value }}%;
-          }
-          
-          @keyframes progress {
-            from {width: 0%;}
-            to {width: {{ progress_value }}%;}
-          }
+              .task-progress {
+              width: {{ progress_value }}%;
+            }
+
+            @keyframes progress {
+              from {width: 0%;}
+              to {width: {{ progress_value }}%;}
+            }
         </style>
-    {% endblock %}
-    <title>I Bee M</title>
-</head>
-<body>
-    
+        {% endblock %}
+        <title>I Bee M</title>
+    </head>
+    <body>
+        <header>
+            <div class="navbar-fixed">
+                <nav class="nav-extended">
+                    <div class="nav-wrapper">
+                        <ul>
+                            <li id="logo-location">
+                                <a href="{{ url_for('get_tasks') }}" class="brand-logo left tooltipped" data-position="bottom" data-tooltip="Database" id="logo-color">I🐝M</a>
+                            </li>
 
-  <header>
-    <div class="navbar-fixed">
-      <nav class="nav-extended">
-          <div class="nav-wrapper">
-            <ul>
-              <li id="logo-location">
-                <a href="{{ url_for('get_tasks') }}" class="brand-logo left tooltipped"
-                data-position="bottom" data-tooltip="Database" id="logo-color">I🐝M</a></li>
+                            <li id="plus-location">
+                                <a href="{{ url_for('add_task') }}" class="tooltipped" data-position="bottom" data-tooltip="Add Entry"><i class="fas fa-plus" id="plus-color"></i></a>
+                            </li>
 
-              <li id="plus-location">
-                <a href="{{ url_for('add_task') }}" class="tooltipped" data-position="bottom"
-                data-tooltip="Add Entry"><i class="fas fa-plus" id="plus-color"></i></a></li>
+                            <li id="search-location">
+                                <form action="{{ url_for('search') }}" method="post">
+                                    <div class="input-field left">
+                                        <input id="search" type="search" name="search" required />
+                                        <label class="label-icon tooltipped" data-position="bottom" data-tooltip="Search" for="search"><i class="fas fa-search" id="search-color"></i></label>
+                                        <i class="material-icons">close</i>
+                                    </div>
+                                </form>
+                            </li>
 
-              <li id="search-location">
-                <form action="{{ url_for('search') }}" method="post"> 
-                  <div class="input-field left">
-                    <input id="search" type="search" name="search" required>
-                    <label class="label-icon tooltipped" data-position="bottom" data-tooltip="Search" for="search"><i class="fas fa-search" id="search-color"></i></label>
-                    <i class="material-icons">close</i>
-                  </div>
-                </form>
-              </li> 
+                            <div id="flashes">
+                                <!-- flash messages -->
+                                {% with messages = get_flashed_messages() %} {% if messages %} {% for message in messages %} {% if message != "Purge Complete!" %}
+                                <li class="right"><a class="tooltipped red pulse btn z-depth-0" data-position="bottom" data-tooltip="Your task">{{ message }}</a></li>
+                                {% else %}
+                                <li class="right"><a href="/end" class="red pulse btn z-depth-0"> {{ message }} Hive efficiency 100%! CLICK HERE!</a></li>
+                                {% endif %} {% endfor %} {% endif %} {% endwith %}
+                            </div>
+                        </ul>
+                    </div>
 
-              <div id="flashes" >
-                <!-- flash messages -->
-                {% with messages = get_flashed_messages() %}
-                    {% if messages %}
-                        {% for message in messages %}
-                          {% if message != "Purge Complete!" %}
-                            <li class="right"><a class="tooltipped red pulse btn z-depth-0"
-                              data-position="bottom" data-tooltip="Your task">{{ message }}</a></li>
-                            {% else %}
-                              <li class="right"><a href="/end" class="red pulse btn z-depth-0">
-                                {{ message }} Hive efficiency 100%! CLICK HERE!</a></span>
-                          {% endif %}
-                        {% endfor %}
-                    {% endif %}
-                {% endwith %}
-            </div>  
+                    <div class="progress-bar-container">
+                        <div class="progress-bar">
+                            <span class="percentage task-progress tooltipped" data-position="right" data-tooltip="Progress"></span>
+                        </div>
+                    </div>
+                </nav>
+            </div>
+        </header>
 
+        <main class="container">
+            {% block content %} {% endblock %}
+        </main>
 
-          </ul>
-
-           
-
-        </div>
-
-        
-
-        <div class="progress-bar-container">
-          <div class="progress-bar">
-              <span class="percentage task-progress tooltipped" data-position="right" data-tooltip="Progress"></span>
-          </div>
-        </div>
-
-      </nav> 
-    </header>
-
-    <main class="container">
-      {% block content %}
-      {% endblock %}
-    </main>
-
-    {% block scripts %}
-      <script src="https://code.jquery.com/jquery-3.5.1.min.js"
-      integrity="sha256-9/aliU8dGd2tb6OSsuzixeV4y/faTqgFtohetphbbj0=" crossorigin="anonymous"></script>
-      <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
-      <script src="https://cdnjs.com/libraries/fullPage.js"></script>
-      <script src="{{ url_for('static', filename='js/script.js')  }}"></script>
-    {% endblock %}
-
-</body>
+        {% block scripts %}
+        <script src="https://code.jquery.com/jquery-3.5.1.min.js" integrity="sha256-9/aliU8dGd2tb6OSsuzixeV4y/faTqgFtohetphbbj0=" crossorigin="anonymous"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+        <script src="https://cdnjs.com/libraries/fullPage.js"></script>
+        <script src="{{ url_for('static', filename='js/script.js')  }}"></script>
+        {% endblock %}
+    </body>
 </html>

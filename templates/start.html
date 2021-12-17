@@ -1,8 +1,7 @@
-{% extends "base_bare.html" %}
-{% block content %}
+{% extends "base_bare.html" %} {% block content %}
 
-    <div id="fullpage">
-        <!--  
+<div id="fullpage">
+    <!--  
         <div class="section center">
             <div class="center-custom">
                 <h1 id="game-title">I🐝M</h1><br>
@@ -11,41 +10,42 @@
             </div>
         </div> 
         -->
-       
-        <div class="section center">
-            <div class="row">
-                <div class="col s12 ">
-                    <h1 id="game-title">I🐝M</h1>
-                </div>
-            </div>
-            <div class="row">
-                <div class="col s12 center-custom">
-                    <p id="game-subtitle">A short admin game about efficient honey production</p>
-                </div>
-            </div>
-            <div class="row">
-                <div class="col s12 center-custom">
-                    <a href="#2"><i class="fas fa-chevron-down" id="arrow" aria-hidden="true"></i></a>
-                </div>
-            </div>     
-        </div>
-    
-        
-        <div class="section center" id="2">
-            <h1 id="honey-pot">🍯</h1><br>
-                <p>
-                    We are a busy hive producing lots of honey<br>
-                    However some of our worker bees are not productive enough!<br><br>
-                    The Queen ordered a census and our new I🐝M database now contains records<br>
-                    of every bee in the hive and various details about them.<br><br>
-                    Will you help us sort through the data to make our hive as efficient as possible?<br>
-                </p>
-            <a href="#3"><i class="fas fa-chevron-down" id="arrow2" aria-hidden="true"></i></a>
-        </div>
 
+    <div class="section center">
+        <div class="row">
+            <div class="col s12">
+                <h1 id="game-title">I🐝M</h1>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col s12 center-custom">
+                <p id="game-subtitle">A short admin game about efficient honey production</p>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col s12 center-custom">
+                <a href="#2"><i class="fas fa-chevron-down" id="arrow" aria-hidden="true"></i></a>
+            </div>
+        </div>
+    </div>
 
-        <div class="section center" id="3">
-          <div class="row">
+    <div class="section center" id="2">
+        <h1 id="honey-pot">🍯</h1>
+        <br />
+        <p>
+            We are a busy hive producing lots of honey<br />
+            However some of our worker bees are not productive enough!<br />
+            <br />
+            The Queen ordered a census and our new I🐝M database now contains records<br />
+            of every bee in the hive and various details about them.<br />
+            <br />
+            Will you help us sort through the data to make our hive as efficient as possible?<br />
+        </p>
+        <a href="#3"><i class="fas fa-chevron-down" id="arrow2" aria-hidden="true"></i></a>
+    </div>
+
+    <div class="section center" id="3">
+        <div class="row">
             <form class="col s12 m8 offset-m2" method="POST" action="{{ url_for('start') }}">
                 <div class="card-panel">
                     <p>Create a username and buzzword to begin!</p>
@@ -53,35 +53,35 @@
                     <div class="row">
                         <!-- <img src="static/images/symbol2.png" width="25px"> -->
                         <div class="input-field col s12">
-                            <input id="username" name="username" type="text" class="validate" minlength="5" maxlength="15" pattern="^[a-zA-Z0-9]{5,15}$" required>
+                            <input id="username" name="username" type="text" class="validate" minlength="5" maxlength="15" pattern="^[a-zA-Z0-9]{5,15}$" required />
                             <label for="username">Username</label>
                         </div>
                     </div>
                     <!-- password -->
                     <div class="row">
                         <div class="input-field col s12">
-                            <input id="password" name="password" type="password" class="validate" minlength="5" maxlength="15" pattern="^[a-zA-Z0-9]{5,15}$" required>
+                            <input id="password" name="password" type="password" class="validate" minlength="5" maxlength="15" pattern="^[a-zA-Z0-9]{5,15}$" required />
                             <label for="password">Buzzword</label>
                         </div>
                     </div>
 
                     <div class="row">
                         <div class="input-field col s12">
-                            <input id="full_name" name="full_name" type="text" class="validate" placeholder="optional but improves game experience">
+                            <input id="full_name" name="full_name" type="text" class="validate" placeholder="optional but improves game experience" />
                             <label for="full_name">Full Name</label>
                         </div>
                     </div>
 
                     <div class="row">
                         <div class="input-field col s12">
-                            <input id="address" name="address" type="text" class="validate" placeholder="optional but improves game experience">
+                            <input id="address" name="address" type="text" class="validate" placeholder="optional but improves game experience" />
                             <label for="address">Email</label>
                         </div>
                     </div>
 
                     <div class="row">
                         <div class="input-field col s12">
-                            <input id="phone" name="phone" type="text" class="validate" placeholder="optional but improves game experience">
+                            <input id="phone" name="phone" type="text" class="validate" placeholder="optional but improves game experience" />
                             <label for="phone">Telephone</label>
                         </div>
                     </div>
@@ -89,19 +89,18 @@
                     <!-- button -->
                     <div class="row">
                         <button type="submit" class="col s12 btn-large yellow waves-effect waves-orange" id="enter-the-hive">
-                        ENTER THE HIVE
+                            ENTER THE HIVE
                         </button>
                     </div>
                 </div>
             </form>
             <div class="row">
-                <div class="col s12 center">
-                    <a href="https://twitter.com/LiamTeaTate" target="_blank" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
+                <div class="col s12" id="created-by">
+                    <a href="https://twitter.com/LiamTeaTate" target="_blank" aria-label="Twitter">Created by <i class="fab fa-twitter"></i></a>
                 </div>
             </div>
         </div>
     </div>
 
-
-{% endblock %}
-    
+    {% endblock %}
+</div>

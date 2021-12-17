@@ -1,4 +1,3 @@
-
 .progress-bar {
   width: 100%;
   height: 10px;
@@ -12,20 +11,22 @@
   animation: progress 1000ms ease-in 1;
 }
 
- 
+#created-by {
+  margin-top: 5px;
+  font-size: 0.8rem;
+}
+
 #your-data {
   font-size: 1rem;
 }
 
-
 #ui-multi-display li {
   padding: 50px;
 }
- 
- 
+
 * {
-  margin: 0; 
-  padding: 0; 
+  margin: 0;
+  padding: 0;
 }
 
 body {
@@ -52,9 +53,8 @@ a {
   color: #333;
 }
 
-
 #general-font-size {
- font-size: 1.5rem;
+  font-size: 1.5rem;
 }
 
 /* label color */
@@ -63,22 +63,22 @@ a {
 }
 
 /* label focus color */
-.input-field input[type=text]:focus + label {
+.input-field input[type="text"]:focus + label {
   color: #333;
 }
 
- /* label underline focus color */
- .input-field input[type=text]:focus {
+/* label underline focus color */
+.input-field input[type="text"]:focus {
   border-bottom: 1px solid #000;
   box-shadow: 0 1px 0 0 #000;
 }
 /* valid color */
-.input-field input[type=text].valid {
+.input-field input[type="text"].valid {
   border-bottom: 1px solid #000;
   box-shadow: 0 1px 0 0 #000;
 }
 /* invalid color */
-.input-field input[type=text].invalid {
+.input-field input[type="text"].invalid {
   border-bottom: 1px solid #000;
   box-shadow: 0 1px 0 0 #000;
 }
@@ -86,7 +86,6 @@ a {
 .input-field .prefix.active {
   color: #000;
 }
-
 
 nav {
   background-color: rgb(255, 236, 130);
@@ -98,7 +97,7 @@ nav li {
 
 .brand-logo {
   margin-left: 2%;
-  top:4px;
+  top: 4px;
 }
 
 #logo-location {
@@ -119,12 +118,12 @@ nav li {
 }
 
 #bee-pic {
-  max-width:300px;
+  max-width: 300px;
 }
 
 #bee-name-symbol {
   margin: 10px;
-  max-width:20px;
+  max-width: 20px;
 }
 
 .container {
@@ -132,7 +131,7 @@ nav li {
 }
 
 body {
-  font-family: 'IBM Plex Serif', serif;
+  font-family: "IBM Plex Serif", serif;
   color: #333;
 }
 
@@ -155,18 +154,18 @@ change "brown" to something of your choosing
 */
 .waves-effect.waves-brown .waves-ripple {
   /* The alpha value allows the text and background color
-  of the button to still show through. */
-   background-color: rgba(121, 85, 72, 0.65);
- }
+of the button to still show through. */
+  background-color: rgba(121, 85, 72, 0.65);
+}
 
 /*
 #fullpage {
-  text-align: center;
+text-align: center;
 }
 
 #checkbox {
-  position:relative;
-  margin-bottom: 5px;
+position:relative;
+margin-bottom: 5px;
 }
 */
 
@@ -176,7 +175,7 @@ change "brown" to something of your choosing
 
 a {
   text-decoration: none;
-  color:#333;
+  color: #333;
 }
 
 .center-custom {
@@ -192,7 +191,6 @@ a {
   max-width: 100%;
   align-items: center;
   justify-content: center;
-
 }
 
 #game-subtitle {
@@ -205,7 +203,7 @@ a {
   position: absolute;
   font-size: 3rem;
   bottom: 20px;
-  margin-left:-15px;
+  margin-left: -15px;
 }
 
 #arrow2 {
@@ -239,7 +237,7 @@ https://codepen.io/seolan/pen/jbGyxq*/
 
 .section:nth-child(3) {
   font-size: 1.5rem;
-   /* background-image: url("/static/images/hivebg.png"); */
+  /* background-image: url("/static/images/hivebg.png"); */
 }
 
 #congrats {
@@ -260,7 +258,7 @@ https://codepen.io/seolan/pen/jbGyxq*/
 }
 
 #book {
-  width: 300px; 
+  width: 300px;
   margin: 40px;
 }
 
@@ -287,7 +285,7 @@ https://codepen.io/seolan/pen/jbGyxq*/
 
 #trail {
   display: flex;
-  position:relative;
+  position: relative;
   right: -458px;
   opacity: 0.2;
   top: 50px;
@@ -296,14 +294,14 @@ https://codepen.io/seolan/pen/jbGyxq*/
 
 #final-bee {
   display: flex;
-  position:relative;
+  position: relative;
   top: -140px;
   right: -425px;
 }
 
 #final-message {
   display: flex;
-  position:relative;
+  position: relative;
   top: -410px;
   right: -30px;
 }
@@ -311,4 +309,3 @@ https://codepen.io/seolan/pen/jbGyxq*/
 #final-comp {
   margin-top: 20px;
 }
-
