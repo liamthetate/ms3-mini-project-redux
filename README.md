@@ -1,108 +1,328 @@
-![CI logo](https://codeinstitute.s3.amazonaws.com/fullstack/ci_logo_small.png)
+![title](static/images/rm-logo.png)
 
-Welcome Liam Tate,
+Live site: http://flask-task-manager-experiment.herokuapp.com/start
 
-This is the Code Institute student template for Gitpod. We have preinstalled all of the tools you need to get started. It's perfectly ok to use this template as the basis for your project submissions.
+# ABOUT
 
-You can safely delete this README.md file, or change it for your own project. Please do read it at least once, though! It contains some important information about Gitpod and the extensions we use. Some of this information has been updated since the video content was created. The last update to this file was: **September 1, 2021**
+A somewhat gamified CRUD experience. I would recommend 'playing' it first before reading any further, as the information contained in this document might neturalise the experience...
 
-## Gitpod Reminders
+<br/>
+<br/>
 
-To run a frontend (HTML, CSS, Javascript only) application in Gitpod, in the terminal, type:
+# PRODUCT SHOT
+![product](static/images/rm-product-shot.png)
+<br/>
+<br/>
 
-`python3 -m http.server`
+# UX
 
-A blue button should appear to click: _Make Public_,
+## User Stories
 
-Another blue button should appear to click: _Open Browser_.
+First Time Visitor Goals
 
-To run a backend Python file, type `python3 app.py`, if your Python file is named `app.py` of course.
+>I want to play a game!
 
-A blue button should appear to click: _Make Public_,
+>I want to understand what my task is.
 
-Another blue button should appear to click: _Open Browser_.
+>I want to navigate the app/site, effortlessly.
 
-In Gitpod you have superuser security privileges by default. Therefore you do not need to use the `sudo` (superuser do) command in the bash terminal in any of the lessons.
+<br/>
 
-To log into the Heroku toolbelt CLI:
+Returning Visitor Goals
 
-1. Log in to your Heroku account and go to *Account Settings* in the menu under your avatar.
-2. Scroll down to the *API Key* and click *Reveal*
-3. Copy the key
-4. In Gitpod, from the terminal, run `heroku_config`
-5. Paste in your API key when asked
+>I want to show a friend this dull but disturbing thing I found.
 
-You can now use the `heroku` CLI program - try running `heroku apps` to confirm it works. This API key is unique and private to you so do not share it. If you accidentally make it public then you can create a new one with _Regenerate API Key_.
+>I want to see what happens when I save the bees.
 
-------
+>I want a quick way to get in contact with the creator.
 
-## Release History
 
-We continually tweak and adjust this template to help give you the best experience. Here is the version history:
+<br/>
 
-**September 1 2021:** Remove `PGHOSTADDR` environment variable.
+Frequent User Goals
 
-**July 19 2021:** Remove `font_fix` script now that the terminal font issue is fixed.
+> I enjoy lists.
+<br/>
+<br/>
 
-**July 2 2021:** Remove extensions that are not available in Open VSX.
+## Design
 
-**June 30 2021:** Combined the P4 and P5 templates into one file, added the uptime script. See the FAQ at the end of this file.
+Colour Scheme
+* Yellow and Black (obviously), with red used to call attention to important information.
+<br/>
 
-**June 10 2021:** Added: `font_fix` script and alias to fix the Terminal font issue
+Typography
+* The main font is 'IBM Plex Serif' with Serif as the fallback.
+<br/>
 
-**May 10 2021:** Added `heroku_config` script to allow Heroku API key to be stored as an environment variable.
+Wireframes
+* [Title Screen](static/images/rm-wf1.png)
+* [Objective](static/images/rm-wf2.png)
+* [Signup](static/images/rm-wf3.png)
+* [Create](static/images/rm-wf4.png)
+* [Read](static/images/rm-wf5a.png)
+* [Update](static/images/rm-wf5b.png)
+* [Delete](static/images/rm-wf5c.png)
+* [Congrats](static/images/rm-wf6.png)
+* [IBM](static/images/rm-wf7.png) 
+* [Game Over](static/images/rm-wf8.png) 
+<br/>
+<br/>
 
-**April 7 2021:** Upgraded the template for VS Code instead of Theia.
+# LIBRARIES, FRAMEWORKS & PROGRAMS USED
 
-**October 21 2020:** Versions of the HTMLHint, Prettier, Bootstrap4 CDN and Auto Close extensions updated. The Python extension needs to stay the same version for now.
+1. Bootstrap 4.5:
+    * Bootstrap was used throughout for layout, buttons etc.
+    
+2. Google Fonts:
+    * Google fonts was used for 'Changa'.
+    
+3. Font Awesome:
+    * Font Awesome was for the top icon and the social media link.
+    
+4. Visual Studio Code
+    * VSC was used for all code creation and pushing to GitHub.
+    
+5. GitHub:
+    * GitHub was used to store the projects code after being pushed from Gitpod.
+    
+6. Photoshop:
+    * Photoshop was used to edit exisitng assets and create new ones.
+    
+7. Balsamiq:
+    * Balsamiq was used to create the wireframes during the design process.
 
-**October 08 2020:** Additional large Gitpod files (`core.mongo*` and `core.python*`) are now hidden in the Explorer, and have been added to the `.gitignore` by default.
+8. KaboomJS:
+    * The javascript library KaboomJS was essential for all the game code.
+    
+8. [Web Formater](https://webformatter.com/):
+    * To format my html, css code and Javascript.
 
-**September 22 2020:** Gitpod occasionally creates large `core.Microsoft` files. These are now hidden in the Explorer. A `.gitignore` file has been created to make sure these files will not be committed, along with other common files.
+9. Dev template:
+    * [Phaser 3 Template](https://github.com/ourcade/phaser3-parcel-template.git) for VSC for development. 
+<br/>
+<br/>
 
-**April 16 2020:** The template now automatically installs MySQL instead of relying on the Gitpod MySQL image. The message about a Python linter not being installed has been dealt with, and the set-up files are now hidden in the Gitpod file explorer.
+# FEATURES 
 
-**April 13 2020:** Added the _Prettier_ code beautifier extension instead of the code formatter built-in to Gitpod.
+## Landing page
 
-**February 2020:** The initialisation files now _do not_ auto-delete. They will remain in your project. You can safely ignore them. They just make sure that your workspace is configured correctly each time you open it. It will also prevent the Gitpod configuration popup from appearing.
+![landing page](src/images/landing-page.png)
+<br/>
+Simple and straightfoward. Not cluttered and just focused on the game experience.
 
-**December 2019:** Added Eventyret's Bootstrap 4 extension. Type `!bscdn` in a HTML file to add the Bootstrap boilerplate. Check out the <a href="https://github.com/Eventyret/vscode-bcdn" target="_blank">README.md file at the official repo</a> for more options.
+## Top HUD
 
-------
+![top hud](src/images/top-hud.png)
+<br/>
+The 1600 is a reference to real targets that 'cleaners' have for iPhones. 
+A better display would have been Hour / Minutes / Seconds but I couldn't figure it out!
 
-## FAQ about the uptime script
+## Player HUD
 
-**Why have you added this script?**
+![player hud](src/images/player-hud.png)
+<br/>
+Oversized and overbearing, permenatly displayed above your head, a signifier of your value lol.
 
-It will help us to calculate how many running workspaces there are at any one time, which greatly helps us with cost and capacity planning. It will help us decide on the future direction of our cloud-based IDE strategy.
+## Spray
 
-**How will this affect me?**
+![player hud](src/images/spray.png)
+<br/>
+A toxic chemical that makes the phones nice and shiny.
 
-For everyday usage of Gitpod, it doesn’t have any effect at all. The script only captures the following data:
+## Fail!
 
-- An ID that is randomly generated each time the workspace is started.
-- The current date and time
-- The workspace status of “started” or “running”, which is sent every 5 minutes.
+![player hud](src/images/fail.png)
+<br/>
+If you don't do your one job properly, the machine will shake!
 
-It is not possible for us or anyone else to trace the random ID back to an individual, and no personal data is being captured. It will not slow down the workspace or affect your work.
+## Chat!
 
-**So….?**
+![player hud](src/images/worker-chat.png)
+<br/>
+The only thing worth doing XD
+<br/>
+<br/>
 
-We want to tell you this so that we are being completely transparent about the data we collect and what we do with it.
+# Testing User Stories from User Experience (UX) Section
 
-**Can I opt out?**
+## First Time Visitor Goals:
 
-Yes, you can. Since no personally identifiable information is being captured, we'd appreciate it if you let the script run; however if you are unhappy with the idea, simply run the following commands from the terminal window after creating the workspace, and this will remove the uptime script:
+>I want to play a silly game!
 
-```
-pkill uptime.sh
-rm .vscode/uptime.sh
-```
+Well it's silly but whether it's fun...
 
-**Anything more?**
+<br/>
 
-Yes! We'd strongly encourage you to look at the source code of the `uptime.sh` file so that you know what it's doing. As future software developers, it will be great practice to see how these shell scripts work.
+>I want to understand the controls.
 
----
+For those that don't like to figure things out, there is a button!
 
-Happy coding!
+<br/>
+
+>I want to navigate the site, effortlessly.
+
+You're in luck! It's so basic and straight forward!
+
+<br/>
+
+## Returning Visitor Goals:
+
+>I want to show a friend this dumb game!
+
+It's still dumb!
+
+<br/>
+
+>I want a quick way to get in contact with the creator.
+
+The social media link is right there!
+
+>I want to see what happens when I work the full 12 hour shift.
+
+It's really disappointing and a waste of time. Meta.
+
+<br/>
+
+## Frequent User Goals:
+
+>I have a serious procrastination problem.
+
+Maybe time is to be wasted?
+<br/>
+<br/>
+
+# FUTURE EXPANSION
+
+There are numerous ways to improve this experience, from small to large.
+
+SMALL: 
+
+* A Hour/Minutes/Seconds countdown for the shift timer.
+
+* Full touch-device compatibility.
+
+* 'Controls?' button is toggle that expands & contracts.
+
+* Less music? The game takes a while to load due to the quantity of tracks.
+
+LARGE:
+
+* Animations! Animated characters and actions would lift the experience.
+
+* Tiolet break! As in the wireframes, the ability to go to the tiolet and cry would make this extra joyful.
+<br/>
+<br/>
+
+
+
+# TESTING
+
+## Devices & Browsers
+
+The site was tested on the following devices:
+
+Device | OS | Browser
+-------|----|---------
+iPhone 8 | iOS 14 | Safari, Ghostery, Firefox 
+Macbook Pro | Big Sur | Safari, Firefox, Chrome, Brave
+<br/>
+
+iPhone 8 couldn't fit the whole game on the screen and was missing vital controls. But it's a desktop experience so...
+
+The fixed width nature of the game means that testing in browsers has been relatively straight forward, the main issue for desktop was keeping the game centered on the page. This was achieved with this css magic formula:
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+KaboomJS has worked flawlessly across all the browsers I tested it on however the AudioContent issue addressed in 'Known Bugs' remains a problem to solve.
+
+
+## Validator testing
+
+HTML: A few errors detected on the W3C validator but I'm outta time! :/
+
+CSS: No errors were found when passing through the Jigsaw W3C validator.
+
+JS: KaboomJS trips 'Jshint' up on almost every line so difficult to know :/
+<br/>
+<br/>
+
+## Lighthouse results
+
+Desktop [View](src/images/lighthouse.png)
+<br/>
+<br/>
+
+## Known bugs
+
+1. Safari is a big one. Because of the AudioContent API, no sound will play at all! Chrome won't play the title music for the same reason but does work after that.
+<br/>
+<br/>
+
+# DEPLOYMENT
+
+To get this code to work on your machine I used this dev template:
+
+* [Phaser 3 Template](https://github.com/ourcade/phaser3-parcel-template.git)
+
+Then in Visual Studio Code, open a zsh terminal and type:
+
+    npm install kaboom
+
+    npm run start // RUN YOUR OWN SERVER
+
+    npm run build // TO MAKE A VERSION FOR THE WEB (Production files will be placed in the dist folder. Then upload those files to a web server.)
+
+I have deployed the game to my own ftp/website [here](http://liamtate.co.uk/efws/index.html) using Filezilla to transfer files. I am happy to supply a username & password so you can check the time and date stamp. (I'm hesitant to deploy it to github pages because I'd have to restructure my development folders then push to this repository and I'm concerned it'll break something this close to the deadline. All the deployed files can be found in the /dist folder).
+
+However, if I was going to deploy to GitHub pages this is how I would do it:
+
+* GitHub repository > 'Settings' tab > 'Pages' menu
+* Source drop-down menu > Select Master Branch > Click Save
+<br/>
+
+To clone a repository via HTTPS you could just read [this handy guide](https://docs.github.com/en/github/creating-cloning-and-archiving-repositories/cloning-a-repository-from-github/cloning-a-repository), or following along below:
+
+* Dropdown menu 'Code' > Choose either HTTPS, SSH or CLI
+* Click clipboard icon
+* Open Terminal > Type: 
+
+        $ git clone https://github.com/YOUR-USERNAME/YOUR-REPOSITORY
+
+* Press Enter:
+
+        $ git clone https://github.com/YOUR-USERNAME/YOUR-REPOSITORY
+        > Cloning into `Spoon-Knife`...
+        > remote: Counting objects: 10, done.
+        > remote: Compressing objects: 100% (8/8), done.
+        > remove: Total 10 (delta 1), reused 10 (delta 1)
+        > Unpacking objects: 100% (10/10), done.
+
+<br/>
+
+To clone a repository to GitHub Desktop:
+
+* Dropdown menu 'Code' > Open with GitHub Desktop
+* Follow the prompts!
+<br/>
+<br/>
+
+# CREDITS
+
+## Code: 
+
+The 'game' owes an obvious debt to the Task Manager mini-project and further code used is detailed below.
+
+<br />
+
+
+
+# SPOILERS
+
+If you Edit > Select All on the webpage you'll find a message.
+On the webpage Right-click > 'Inspect / Inspect Element' > Console. You will find a further message.
+Got it yet? Hit the + and - keys for fun times!
+
+The idea, at least for me, is to free the workers by breaking or crashing the actual game by overwhelming the machine(s) #Luddite :D
