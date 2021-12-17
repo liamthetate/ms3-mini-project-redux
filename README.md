@@ -285,43 +285,20 @@ Whilst the 'start' page generally [scored well](static/images/rm-lh1.png), the m
 
 # DEPLOYMENT
 
-Linking up GitHub repository with Heroku and auto thingy.
+Heroku:
+* Login to Heroku
+* Create a new app > create-a-name-with-dashes > select region closest to you (Europe) > create app.
+* Under the Deploy tab > connect to GitHub > add depository name > search > connect.
+* Under the Heroku's Settings tab > click Reveal Config files
+* Enter 'I.P' and '0.0.0.0' 
+* Enter 'Port' and '5000'
+* Enter 'SECRET_KEY' and (value from env.py)
+* Enter 'MONGO_URI' and ''
+* Enter 'MONGO_DBNAME' and 'name-with-dashes'
+* (Using your CLI add proc and requirements.txt to your github)
+* Under Heroku's Deploy tab > enable Automatic Deployment > then click Deploy Branch (to main).
+* Once it's built click 'View'.
 
-
-
-
-
-
-
-GitHub pages:
-
-* GitHub repository > 'Settings' tab > 'Pages' menu
-* Source drop-down menu > Select Master Branch > Click Save
-<br/>
-
-To clone a repository via HTTPS you could just read [this handy guide](https://docs.github.com/en/github/creating-cloning-and-archiving-repositories/cloning-a-repository-from-github/cloning-a-repository), or following along below:
-
-* Dropdown menu 'Code' > Choose either HTTPS, SSH or CLI
-* Click clipboard icon
-* Open Terminal > Type: 
-
-        $ git clone https://github.com/YOUR-USERNAME/YOUR-REPOSITORY
-
-* Press Enter:
-
-        $ git clone https://github.com/YOUR-USERNAME/YOUR-REPOSITORY
-        > Cloning into `Spoon-Knife`...
-        > remote: Counting objects: 10, done.
-        > remote: Compressing objects: 100% (8/8), done.
-        > remove: Total 10 (delta 1), reused 10 (delta 1)
-        > Unpacking objects: 100% (10/10), done.
-
-<br/>
-
-To clone a repository to GitHub Desktop:
-
-* Dropdown menu 'Code' > Open with GitHub Desktop
-* Follow the prompts!
 <br/>
 <br/>
 
