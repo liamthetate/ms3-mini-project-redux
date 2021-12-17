@@ -1,3 +1,5 @@
+/* ----- NOT MY CODE: START ----- */
+
 .progress-bar {
   width: 100%;
   height: 10px;
@@ -10,6 +12,8 @@
   background-color: #333;
   animation: progress 1000ms ease-in 1;
 }
+
+/* ----- NOT MY CODE: END ----- */
 
 #created-by {
   margin-top: 5px;
@@ -33,8 +37,6 @@ body {
   background-color: white;
 }
 
-/* -------------------------------------------------------- colors */
-
 a {
   color: #333;
 }
@@ -56,6 +58,9 @@ a {
 #general-font-size {
   font-size: 1.5rem;
 }
+
+
+/* ----- NOT MY CODE: START ----- */
 
 /* label color */
 .input-field label {
@@ -86,6 +91,9 @@ a {
 .input-field .prefix.active {
   color: #000;
 }
+
+/* ----- NOT MY CODE: END ----- */
+
 
 nav {
   background-color: rgb(255, 236, 130);
@@ -148,6 +156,8 @@ body {
   line-height: 42px;
 }
 
+/* ----- NOT MY CODE: START ----- */
+
 /*
 When creating your CSS selector,
 change "brown" to something of your choosing
@@ -158,16 +168,7 @@ of the button to still show through. */
   background-color: rgba(121, 85, 72, 0.65);
 }
 
-/*
-#fullpage {
-text-align: center;
-}
-
-#checkbox {
-position:relative;
-margin-bottom: 5px;
-}
-*/
+/* ----- NOT MY CODE: END ----- */
 
 #grey {
   color: rgb(201, 201, 201);
@@ -219,12 +220,16 @@ a {
   font-size: 8rem;
 }
 
+/* ----- NOT MY CODE: START ----- */
+
 /* 
 https://codepen.io/seolan/pen/jbGyxq*/
 .section:nth-child(2) {
   font-size: 1.2rem;
   line-height: 2.8rem;
 }
+
+/* ----- NOT MY CODE: END ----- */
 
 #highlight {
   font-size: 2rem;
@@ -235,10 +240,14 @@ https://codepen.io/seolan/pen/jbGyxq*/
   margin-bottom: 60px;
 }
 
+/* ----- NOT MY CODE: START ----- */
+
 .section:nth-child(3) {
   font-size: 1.5rem;
   /* background-image: url("/static/images/hivebg.png"); */
 }
+
+/* ----- NOT MY CODE: END ----- */
 
 #congrats {
   font-size: 8em;

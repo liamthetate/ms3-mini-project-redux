@@ -2,10 +2,10 @@ import os
 import random #for game data
 
 from flask import (
-    Flask, flash, render_template, #flash is the prompts for the user
-    redirect, request, session, url_for) #request reads forms from the user
+    Flask, flash, render_template, 
+    redirect, request, session, url_for) 
 from flask_pymongo import PyMongo
-from bson.objectid import ObjectId #used for finding stuff like -> category = mongo.db.categories.find_one({"_id": ObjectId(category_id)})
+from bson.objectid import ObjectId 
 from werkzeug.security import generate_password_hash, check_password_hash
 if os.path.exists("env.py"):
     import env
@@ -14,9 +14,9 @@ if os.path.exists("env.py"):
 app = Flask(__name__)
 
 
-app.config["MONGO_DBNAME"] = os.environ.get("MONGO_DBNAME") #stock values
-app.config["MONGO_URI"] = os.environ.get("MONGO_URI")       #stock values
-app.secret_key = os.environ.get("SECRET_KEY")               #stock values
+app.config["MONGO_DBNAME"] = os.environ.get("MONGO_DBNAME") 
+app.config["MONGO_URI"] = os.environ.get("MONGO_URI")       
+app.secret_key = os.environ.get("SECRET_KEY")               
 
 
 mongo = PyMongo(app)
@@ -71,37 +71,36 @@ def wasp_db():
 def plant_database():
     for i in range(20): #creates database on load of page, 20 is number of bees in hive
         mongo.db.tasks.insert_one(automated_db())
-    mongo.db.tasks.insert_one(wasp_db()) #at least one wasp in the db!
+    mongo.db.tasks.insert_one(wasp_db()) #Need at least one wasp in the db!
 
 
 #GAME START 
 @app.route("/") 
 @app.route("/start", methods=["GET", "POST"])
 def start():
-    if request.method == "POST": #has use tried to post info? then...
-        existing_user = mongo.db.users.find_one( # look at 'users' on db and see if they are there
+    if request.method == "POST": 
+        existing_user = mongo.db.users.find_one( 
             {"username": request.form.get("username").lower()})
 
         if existing_user:
-            flash("Username already exists") #settings for flash to be found on base.html
-            return redirect(url_for("start")) #basically try again
+            flash("Username already exists") 
+            return redirect(url_for("start")) 
 
-        register = { #gets values from users form
+        register = { 
             "username": request.form.get("username").lower(),
             "password": generate_password_hash(request.form.get("password")),
             "full_name": request.form.get("full_name").lower(),
             "phone": request.form.get("phone"),
             "address": request.form.get("address").lower()
         }
-        mongo.db.users.insert_one(register) #adds those values into the db
+        mongo.db.users.insert_one(register) 
 
         # put the new user into 'session' cookie
-        session["user"] = request.form.get("username").lower() #gets username
+        session["user"] = request.form.get("username").lower() 
         flash("Registration Successful!")
         return redirect(url_for("welcome", username=session["user"]))
         
     return render_template("start.html")
-
 
 
 @app.route('/welcome', methods=["GET", "POST"])
@@ -119,19 +118,6 @@ def welcome():
         return redirect(url_for("get_tasks"))
 
     return render_template('welcome_task.html', progress_value=progress_value)
-
-
-#DEBUG TOOLS
-@app.route("/fill-db-button", methods=["GET", "POST"]) 
-def fill_db_button():
-    for i in range(20): #number of bees in hive
-        mongo.db.tasks.insert_one(automated_db())
-    return redirect("get_tasks")
-
-@app.route("/delete-all", methods=["GET", "POST"]) 
-def delete_all():
-    mongo.db.tasks.delete_many({})
-    return redirect("get_tasks")
 
 
 #UI TASKS ORDERED
@@ -155,6 +141,9 @@ def ui_tasks():
                 flash("Purge Complete!")
 
 '''
+# HELLO EXAMINER! Try this, comment out above '#UI TASKS ORDERED' and use this code instead.
+# Better or Worse? I couldn't decide.
+
 #UI TASKS ALL AT ONCE
 def ui_tasks():
     any_wasps = list(mongo.db.tasks.find({"$text": {"$search": "wasp"}}))
@@ -200,25 +189,18 @@ def get_tasks():
     ui_tasks()
     tasks = list(mongo.db.tasks.find())
 
-    #if end_state() == "end":
-    #    return render_template("tasks.html", tasks=tasks, progress_value=progress_value)
-        
-
      #.tasks inside this is referencing the tasks on mongo
-    return render_template("tasks.html", tasks=tasks, progress_value=progress_value) #takes the taks found in the db and displyas them on page
+    return render_template("tasks.html", tasks=tasks, progress_value=progress_value)
 
 
 #SEARCH
-@app.route("/search/", methods=["GET", "POST"]) #GET happens by default so we don't have to write it, unless we want POST
+@app.route("/search/", methods=["GET", "POST"]) 
 def search():
     progress_value = progress_bar()
     ui_tasks()
-    query = request.form.get("search") #what the user wrote
-    tasks = list(mongo.db.tasks.find({"$text": {"$search": query}})) #what the database has / 
-    return render_template("tasks.html", tasks=tasks, progress_value=progress_value) #page render of results
-    #return redirect(url_for("get_tasks"))
-
-
+    query = request.form.get("search") 
+    tasks = list(mongo.db.tasks.find({"$text": {"$search": query}})) 
+    return render_template("tasks.html", tasks=tasks, progress_value=progress_value) 
 
 
 #ADD TASK
@@ -227,7 +209,7 @@ def add_task():
     progress_value = progress_bar()
     ui_tasks()
     if request.method == "POST":
-        task = { #get all the values the user has typed
+        task = { 
             "task_name": request.form.get("task_name"),
             "honey_production": request.form.get("honey_production"),
             "health": request.form.get("health"),
@@ -235,8 +217,7 @@ def add_task():
         mongo.db.tasks.insert_one(task) 
         return redirect(url_for("get_tasks"))
 
-    #categories = mongo.db.categories.find().sort("category_name", 1)
-    return render_template("add_task.html", progress_value=progress_value) #display the catgeoires on the page that are in db
+    return render_template("add_task.html", progress_value=progress_value) 
 
 
 #EDIT TASK
@@ -246,28 +227,24 @@ def edit_task(task_id):
     ui_tasks()
     if request.method == "POST":
         is_urgent = "on" if request.form.get("is_urgent") else "off"
-        submit = { #get all the values the user has typed
+        submit = { 
             "task_name": request.form.get("task_name"),
             "honey_production": request.form.get("honey_production"),
             "health": request.form.get("health"),
         }
         mongo.db.tasks.update_one({"_id": ObjectId(task_id)}, {"$set": submit}) #code fix for tutorial error
-        #flash("Task Successfully Updated")
         return redirect(url_for("get_tasks"))
 
     task = mongo.db.tasks.find_one({"_id": ObjectId(task_id)})
     categories = mongo.db.categories.find().sort("category_name", 1)
-    return render_template("edit_task.html", task=task, progress_value=progress_value) #display task & cats fround in db
+    return render_template("edit_task.html", task=task, progress_value=progress_value) 
 
 
 #DELETE TASK
 @app.route("/delete_task/<task_id>")
 def delete_task(task_id):
     mongo.db.tasks.delete_one({"_id": ObjectId(task_id)})
-    #flash("Thank you! The Bee is under investigation by authorities")
-    #return render_template("tasks.html")
     return redirect(url_for("get_tasks"))
-
 
 
 #DELETE MULTIPLE TASKS
@@ -280,7 +257,7 @@ def delete_multiple():
         return redirect(url_for("get_tasks"))
 
 
-#END / DESTROY ALL DATA (despite what's written on the page lol)
+#END / DESTROY ALL DATA 
 @app.route("/end")
 def end():
     mongo.db.tasks.delete_many({}) #deletes GAME database
@@ -292,12 +269,6 @@ def end():
 
     return render_template("end.html")
 
-'''
-#LOGOUT A
-@app.route("/logout")
-def logout():
-    return render_template("logged_out.html")
-'''
 
 if __name__ == "__main__":
     app.run(host=os.environ.get("IP"),

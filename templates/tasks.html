@@ -19,16 +19,6 @@
     </div>
 </div>
 
-<!-- 
-    <form action="/fill-db-button">
-        <input type="submit" value="Fill DataBase" />
-    </form>
-
-    <form action="/delete-all">
-        <input type="submit" value="Delete All" />
-    </form>
-    -->
-
 {% if tasks|length > 0 %}
 <form action="/delete_multiple" method="post">
     <input type="submit" value="REPORT all selected" class="btn-small red" onclick="M.toast({html: 'Reported! Good Job!', classes: 'rounded'})" />

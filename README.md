@@ -79,43 +79,43 @@ Wireframes
 
 1. Materialize:
     * Materialize was used throughout for layout, buttons etc.
-  <br/>
+
 2. Google Fonts:
     * Google fonts was used for 'IBM Plex Serif'.
-    <br/>
+
 3. Font Awesome:
     * Font Awesome was for the top icon and the social media link.
-    <br/>
-4. Gitpod
+
+4. Gitpod:
     * Gitpod was used for all code creation and pushing to GitHub.
-    <br/>
+
 5. GitHub:
     * GitHub was used to store the projects code after being pushed from Gitpod.
-    <br/>
+
 6. Photoshop:
     * Photoshop was used to create a fake 'handwritten' picture of a bee's data.
-    <br/>
+
 7. Balsamiq:
     * Balsamiq was used to create the wireframes during the design process.
-<br/>
+
 8. Full Page JS:
     * The javascript library Full Page JS was used for the start and end pages.
-    <br/>
+
 9. [Web Formater](https://webformatter.com/):
     * To format my html, css code and Javascript.
-<br/>
+
 10. Heroku:
     * For hosting the app/site, synced to GitHub.
-<br/>
+
 11. MongoDB:
     * For database hosting and backend CRUD functionalitity.
-<br/>
+
 12. Jinja:
     * Template engine 
-<br/>
+
 13. Flask:
     * Framework used to write the web application.
-<br/>
+
 14. Python:
     * For all the game logic and CRUD operations.
 <br/>
@@ -127,7 +127,7 @@ Wireframes
 
 ![landing page](static/images/rm-landing-page.png)
 <br/>
-A visual gag. A simple and straightfoward website design with a genocidal cleanliness.
+A visual gag. A simple and straightfoward website design with genocidal cleanliness.
 
 ## Top HUD
 
@@ -147,29 +147,29 @@ Each item brings up a descriptive box on mouser hover.
 <br/>
 A subtle progress bar updates with each completed task. 
 
-## Instructions!
+## Notifications
+
+![notifications](static/images/rm-notifications.png)
+<br/>
+A red box detailing the current task.
+
+## Instructions
 
 ![instructions](static/images/rm-instructions.png)
 <br/>
 Just to make it clear what the user has to do.
 
-## Notifications!
-
-![notifications](static/images/rm-notifications.png)
-<br/>
-A red box detailing the current task
-
 ## Report?
 
 ![list item](static/images/rm-list-item.png)
 <br/>
-Each bee can either be indidivually reported on or edited or selected
+Each lis item contains the name, productivity and health of each bee. They can either be selected, edited or individually reported.
 
-## Select?
+## Select many
 
 ![select](static/images/rm-select.png)
 <br/>
-Each bee can either be selected and then batch 'reported'.
+Each bee can either be selected and then batch 'reported'. There is also a REPORT ALL SELECTED button on the bottom of the page.
 <br/>
 <br/>
 
@@ -179,7 +179,7 @@ Each bee can either be selected and then batch 'reported'.
 
 >I want to play a game.
 
-Well, it's not going to be fun.
+Well, this one probably isn't going to be that fun.
 
 <br/>
 
@@ -191,7 +191,7 @@ The opening story, menu instructions and flashing red icons should communicate w
 
 >I want to navigate the app/site, effortlessly.
 
-As a one-shot experience there is a flow to the UX and simple UI
+The UI is straight forward enough and as a one-shot experience there is a flow to the UX.
 
 <br/>
 
@@ -211,7 +211,7 @@ Nothing new on-screen, but you're a good person.
 
 >I want a quick way to get in contact with the creator.
 
-It's right at the bottom of the start page.
+It's not obvious but it's at the bottom of the start page.
 
 <br/>
 
@@ -225,15 +225,9 @@ I like your style.
 
 # FUTURE EXPANSION
 
-There are numerous ways to improve this experience, from small to large.
+* Only display bee information that pertains to the current task i.e. if the UI says find the 'diseased', the page doesn't show honey productivity. At the moment it's more intuitive to skip ahead and start reporting bees that aren't yet a focus of attention.
 
-SMALL: 
-
-* Only display list information that pertains to the current task i.e. if the UI says find the diseased, the list below only lists disease and not honey productivity. At the moment it's more intuitive to 'skip ahead' and start reporting bees that aren't yet a focus of attention.
-
-LARGE:
-
-* More involved tasks! For example: Finding the Admin or Head of BR (Bee Resources) log-in details on the list, then logging-in as them and reporting them as diseased / poor productivity, lol!
+* More involved tasks! For example: finding the Admin or Head of BR (Bee Resources) log-in details on the list, then logging-in as them and reporting them as diseased / poor productivity, lol!
 
 <br/>
 <br/>
@@ -339,10 +333,12 @@ The select multiple / check box code is my own, but I figured it out after watch
 
 SPECIFIC:
 
+Fullpage.css is obviously not mine and style.css contains comments where I've used others code.
+
 Clearing flask messages - I was getting bugs on the main menu displaying too many messages, [this](https://stackoverflow.com/questions/63387031/how-to-clear-existing-flash-messages-in-flask) fixed it.
 
 
-Progress Bar - It took a few different resources to figure out how to make one and whilst I modified it to fit, the code is not mine. 
+CSS Progress Bar - It took a few different resources to figure out how to make one and whilst I modified it to fit, the CSS code is not mine. The Python is.
 [1](https://www.w3schools.com/cssref/css3_pr_animation-keyframes.asp) [2](https://www.geeksforgeeks.org/how-to-create-a-progress-bar-animation-using-html-and-css/) [3](https://stackoverflow.com/questions/51383352/change-css-with-python-and-flask)
 
 
